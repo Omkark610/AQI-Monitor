@@ -1,0 +1,1140 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+
+
+    <!-- Google AdSense -->
+    <meta name="google-adsense-account" content="ca-pub-7963880628277539">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7963880628277539" crossorigin="anonymous"></script>
+
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-PGR4Y0TVNP"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-PGR4Y0TVNP');
+    </script>
+	
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>AQI Monitor — Global Environmental Intelligence</title>
+<meta name="description" content="Explore air quality, noise, atmospheric conditions, environmental risk and travel advisories anywhere in the world.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/maplibre-gl@5.6.0/dist/maplibre-gl.css">
+<style>
+:root{--hh:112px;--bg:#050a14;--bg2:#0a1322;--panel:rgba(14,24,42,.68);--panel2:rgba(24,40,66,.5);--bd:rgba(110,190,255,.16);--tx:#e7f0fb;--mut:#8da2bd;--ac:#35d4ff;--ac2:#2de2c0;--ok:#22d3a0;--warn:#ffc247;--bad:#ff5d52;--sh:0 10px 40px rgba(0,0,0,.45);--r:16px;--panelw:392px;font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif;color-scheme:dark}
+[data-theme=light]{--bg:#e9f0f8;--bg2:#f5f8fc;--panel:rgba(255,255,255,.8);--panel2:rgba(236,244,252,.85);--bd:rgba(30,80,140,.16);--tx:#0b1a2e;--mut:#4f657e;--ac:#0b86b8;--ac2:#0a9a82;--sh:0 10px 30px rgba(30,60,100,.16);color-scheme:light}
+*{box-sizing:border-box}[hidden]{display:none!important}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--tx);min-height:100dvh;font-size:15px;line-height:1.5;background-image:radial-gradient(1200px 600px at 10% -10%,rgba(53,212,255,.12),transparent 60%),radial-gradient(900px 500px at 100% 0,rgba(45,226,192,.09),transparent 60%);background-attachment:fixed}
+h1,h2,h3,h4{font-family:Manrope,Inter,sans-serif;margin:0;letter-spacing:-.01em}
+h1{font-size:clamp(1.5rem,3.2vw,2.2rem);font-weight:800}h2{font-size:1.15rem;font-weight:700}h3{font-size:1rem;font-weight:700}
+a{color:var(--ac)}p{margin:.4em 0}small,.mut{color:var(--mut)}
+.skip{position:absolute;left:-999px;top:8px;background:var(--ac);color:#001;padding:8px 12px;border-radius:8px;z-index:999}.skip:focus{left:8px}
+:focus-visible{outline:2px solid var(--ac);outline-offset:2px;border-radius:6px}
+button,select,input{font:inherit;color:inherit}
+button{cursor:pointer}
+/* header */
+#hdr{position:sticky;top:0;z-index:50;background:var(--panel);backdrop-filter:blur(18px) saturate(1.4);-webkit-backdrop-filter:blur(18px) saturate(1.4);border-bottom:1px solid var(--bd);display:flex;flex-wrap:wrap;align-items:center;gap:8px 16px;padding:8px clamp(12px,2.5vw,28px)}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--tx);font-family:Manrope;font-weight:800;letter-spacing:.04em;font-size:1.05rem}
+.brand b{color:var(--ac)}.brand small{display:block;font:500 .62rem Inter;letter-spacing:.14em;text-transform:uppercase;color:var(--mut)}
+.logo{width:34px;height:34px}
+#nav{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;flex:1 1 420px;min-width:0;order:3}
+@media(min-width:1180px){#nav{order:0}}
+#nav::-webkit-scrollbar{display:none}
+#nav a,#nav button{white-space:nowrap;padding:7px 12px;border-radius:10px;text-decoration:none;color:var(--mut);background:none;border:0;font-weight:500;font-size:.88rem}
+#nav a:hover,#nav button:hover{color:var(--tx);background:var(--panel2)}
+#nav a[aria-current=page]{color:var(--tx);background:linear-gradient(135deg,rgba(53,212,255,.2),rgba(45,226,192,.12));box-shadow:inset 0 0 0 1px var(--bd)}
+.menuwrap{position:relative}.menu{position:absolute;right:0;top:110%;min-width:200px;background:var(--bg2);border:1px solid var(--bd);border-radius:12px;padding:6px;box-shadow:var(--sh);z-index:70}
+.menu a{display:block}
+.tools{display:flex;align-items:center;gap:8px;margin-left:auto}
+.ibtn{width:38px;height:38px;border-radius:11px;border:1px solid var(--bd);background:var(--panel2);display:grid;place-items:center;position:relative}
+.ibtn:hover{border-color:var(--ac)}.ibtn svg{width:18px;height:18px}
+.ibtn .dot{position:absolute;top:6px;right:6px;width:8px;height:8px;border-radius:50%;background:var(--ac2);box-shadow:0 0 8px var(--ac2)}
+.search{position:relative;width:min(260px,40vw)}
+.search input{width:100%;padding:9px 12px 9px 34px;border-radius:11px;border:1px solid var(--bd);background:var(--panel2)}
+.search input:focus{outline:none;border-color:var(--ac);box-shadow:0 0 0 3px rgba(53,212,255,.15)}
+.search>svg{position:absolute;left:10px;top:10px;width:16px;height:16px;color:var(--mut)}
+#sugg{position:absolute;left:0;right:0;top:110%;margin:0;padding:6px;list-style:none;background:var(--bg2);border:1px solid var(--bd);border-radius:12px;box-shadow:var(--sh);max-height:60vh;overflow:auto;z-index:80;min-width:260px}
+#sugg li{padding:8px 10px;border-radius:8px;cursor:pointer;display:flex;gap:8px;align-items:center}
+#sugg li[aria-selected=true],#sugg li:hover{background:rgba(53,212,255,.14)}#sugg small{margin-left:auto}
+.pop{position:absolute;right:0;top:115%;width:280px;background:var(--bg2);border:1px solid var(--bd);border-radius:14px;padding:14px;box-shadow:var(--sh);z-index:80}
+.pop h4{font-size:.8rem;text-transform:uppercase;letter-spacing:.1em;color:var(--mut);margin-bottom:8px}
+.row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:6px 0}
+.sw{position:relative;width:42px;height:24px;border-radius:99px;background:var(--panel2);border:1px solid var(--bd);transition:.2s;flex:none}
+.sw::after{content:"";position:absolute;top:2px;left:2px;width:18px;height:18px;border-radius:50%;background:var(--mut);transition:.2s}
+.sw[aria-pressed=true]{background:rgba(53,212,255,.3);border-color:var(--ac)}.sw[aria-pressed=true]::after{left:20px;background:var(--ac);box-shadow:0 0 10px var(--ac)}
+input[type=range]{accent-color:var(--ac);width:100%}
+#netBanner{background:rgba(255,93,82,.14);border-bottom:1px solid rgba(255,93,82,.4);padding:8px 20px;font-size:.88rem}
+/* pages */
+.page{display:none}.page.active{display:block;animation:pg .4s ease both}
+@keyframes pg{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.page:not(#p-map){padding:26px clamp(14px,4vw,48px) 60px;max-width:1440px;margin:0 auto}
+.ph{display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;align-items:flex-end;margin-bottom:20px}
+.ph p{color:var(--mut);max-width:70ch}
+.loc{display:flex;gap:8px;align-items:center;color:var(--mut);font-size:.85rem}
+select,.sel{padding:8px 10px;border-radius:10px;border:1px solid var(--bd);background:var(--bg2);color:var(--tx);max-width:100%}
+.card{background:var(--panel);border:1px solid var(--bd);border-radius:var(--r);padding:18px;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:var(--sh);position:relative}
+.card>h2,.card>h3{margin-bottom:10px}
+.grid{display:grid;gap:16px}.g2{grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr))}.g3{grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))}.g4{grid-template-columns:repeat(auto-fit,minmax(min(100%,190px),1fr))}.g6{grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr))}
+.main2{display:grid;gap:16px;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr)}@media(max-width:1000px){.main2{grid-template-columns:1fr}}
+.kpi{padding:16px}.kpi b{display:block;font:800 1.9rem Manrope;letter-spacing:-.02em;background:linear-gradient(120deg,var(--ac),var(--ac2));-webkit-background-clip:text;background-clip:text;color:transparent}.kpi span{font-size:.8rem;color:var(--mut)}
+.hero{padding:30px;overflow:hidden;background:linear-gradient(135deg,rgba(53,212,255,.16),rgba(45,226,192,.06) 55%,transparent),var(--panel)}
+.hero::after{content:"";position:absolute;right:-80px;top:-80px;width:320px;height:320px;border-radius:50%;background:radial-gradient(circle,rgba(53,212,255,.35),transparent 65%);filter:blur(6px);animation:pulse 6s ease-in-out infinite}
+@keyframes pulse{50%{transform:scale(1.15);opacity:.7}}
+.hero h1{font-size:clamp(1.8rem,5vw,3rem);max-width:18ch}.hero p{max-width:60ch;color:var(--mut)}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:9px 16px;border-radius:11px;border:1px solid var(--bd);background:var(--panel2);font-weight:600;font-size:.88rem;text-decoration:none;color:var(--tx)}
+.btn:hover{border-color:var(--ac)}.btn.pri{background:linear-gradient(135deg,var(--ac),var(--ac2));color:#02131c;border:0}.btn.sm{padding:5px 10px;font-size:.78rem}.btn svg{width:16px;height:16px}
+.seg{display:inline-flex;background:var(--panel2);border:1px solid var(--bd);border-radius:11px;padding:3px;flex-wrap:wrap;gap:2px}
+.seg button{border:0;background:none;padding:6px 12px;border-radius:8px;color:var(--mut);font-weight:600;font-size:.82rem}
+.seg button[aria-pressed=true]{background:linear-gradient(135deg,rgba(53,212,255,.28),rgba(45,226,192,.2));color:var(--tx);box-shadow:inset 0 0 0 1px var(--bd)}
+.badge{display:inline-block;padding:2px 8px;border-radius:99px;font-size:.68rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;border:1px solid}
+.b-mod{color:#7cc4ff;border-color:rgba(124,196,255,.45);background:rgba(124,196,255,.1)}.b-mea{color:#4be3a8;border-color:rgba(75,227,168,.45);background:rgba(75,227,168,.1)}.b-fc{color:#ffc86a;border-color:rgba(255,200,106,.45);background:rgba(255,200,106,.1)}.b-na{color:var(--mut);border-color:var(--bd)}.b-ctx{color:#d6a8ff;border-color:rgba(214,168,255,.45);background:rgba(214,168,255,.1)}
+.pill{display:inline-flex;align-items:center;gap:6px;padding:3px 10px;border-radius:99px;font-weight:700;font-size:.78rem;background:color-mix(in srgb,var(--c) 22%,transparent);color:var(--c);border:1px solid color-mix(in srgb,var(--c) 55%,transparent)}
+.gauge{position:relative;flex:none}.gauge svg{width:100%;height:100%;transform:none}.gauge .trk{fill:none;stroke:var(--bd);stroke-width:9}
+.gauge .val{fill:none;stroke:var(--c);stroke-width:9;stroke-linecap:round;transform:rotate(-90deg);transform-origin:60px 60px;transition:stroke-dashoffset 1.3s cubic-bezier(.2,.8,.2,1);filter:drop-shadow(0 0 6px var(--c))}
+.gauge .gv{position:absolute;inset:0;display:grid;place-content:center;text-align:center}.gv b{font:800 2rem/1 Manrope;color:var(--c)}.gv small{font-size:.66rem;letter-spacing:.08em;text-transform:uppercase}
+.heroaq{display:flex;gap:18px;align-items:center;flex-wrap:wrap}
+.pol{padding:12px;border-radius:13px;background:var(--panel2);border:1px solid var(--bd)}.pol small{display:flex;justify-content:space-between}.pol b{font:700 1.35rem Manrope}.pol b i{font:500 .72rem Inter;color:var(--mut);font-style:normal;margin-left:4px}
+.bar{height:6px;border-radius:9px;background:var(--bd);position:relative;margin:8px 0 4px;overflow:visible}.bar>span{display:block;height:100%;border-radius:9px;background:var(--c,var(--ac));transition:width 1s}.bar>em{position:absolute;left:33.3%;top:-3px;width:2px;height:12px;background:var(--tx);opacity:.6}
+table{width:100%;border-collapse:collapse;font-size:.86rem}th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--bd);vertical-align:top}th{color:var(--mut);font-weight:600;font-size:.76rem;text-transform:uppercase;letter-spacing:.06em}
+.tw{overflow-x:auto}
+.skeleton{border-radius:12px;min-height:80px;background:linear-gradient(100deg,var(--panel2) 30%,rgba(120,200,255,.14) 50%,var(--panel2) 70%);background-size:200% 100%;animation:sh 1.4s infinite}@keyframes sh{to{background-position:-200% 0}}
+.note{font-size:.8rem;color:var(--mut);border-left:3px solid var(--bd);padding:4px 10px;margin:10px 0}
+.warn{border-left-color:var(--warn)}.unav{padding:14px;border:1px dashed var(--bd);border-radius:12px;color:var(--mut);background:var(--panel2)}
+.rk{display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid var(--bd);cursor:pointer;background:none;border-left:0;border-right:0;border-top:0;width:100%;text-align:left}.rk:hover{background:rgba(53,212,255,.06)}.rk .n{width:22px;color:var(--mut);font-weight:700}.rk .nm{flex:1}
+.chartbox{position:relative;height:300px}.chartbox.sm{height:230px}
+.cause{border-left:4px solid var(--c,var(--bd))}.cause ul{margin:6px 0 6px 18px;padding:0}
+details{background:var(--panel2);border:1px solid var(--bd);border-radius:12px;padding:10px 14px;margin:8px 0}summary{cursor:pointer;font-weight:600}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+dialog{background:var(--bg2);color:var(--tx);border:1px solid var(--bd);border-radius:18px;padding:22px;width:min(560px,94vw);box-shadow:var(--sh)}dialog::backdrop{background:rgba(0,0,0,.55);backdrop-filter:blur(3px)}
+label.f{display:block;font-size:.82rem;color:var(--mut);margin:10px 0 4px}input.t{width:100%;padding:9px 11px;border-radius:10px;border:1px solid var(--bd);background:var(--panel2)}
+#toasts{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;display:flex;flex-direction:column;gap:8px;z-index:200;width:min(440px,92vw);pointer-events:none}
+.toast{pointer-events:auto;background:var(--bg2);border:1px solid var(--bd);border-left:4px solid var(--ac);border-radius:12px;padding:10px 14px;box-shadow:var(--sh);animation:pg .3s both;font-size:.88rem}.toast.err{border-left-color:var(--bad)}.toast.warn{border-left-color:var(--warn)}
+#boot{position:fixed;inset:0;z-index:500;background:var(--bg);display:grid;place-content:center;text-align:center;gap:14px;transition:opacity .6s}
+#boot.out{opacity:0;pointer-events:none}.rings{width:96px;height:96px;margin:auto;position:relative}.rings i{position:absolute;inset:0;border-radius:50%;border:2px solid var(--ac);opacity:0;animation:rg 2.2s infinite}.rings i:nth-child(2){animation-delay:.7s}.rings i:nth-child(3){animation-delay:1.4s}@keyframes rg{0%{transform:scale(.2);opacity:.9}100%{transform:scale(1.2);opacity:0}}
+.rings::after{content:"";position:absolute;inset:36px;border-radius:50%;background:radial-gradient(var(--ac2),var(--ac));box-shadow:0 0 30px var(--ac)}
+footer{padding:26px clamp(14px,4vw,48px);color:var(--mut);font-size:.78rem;border-top:1px solid var(--bd);text-align:center}
+body[data-page=map] footer{display:none}body[data-page=map]{overflow:hidden}
+/* map page */
+#p-map.active{position:relative;height:calc(100dvh - var(--hh));min-height:420px;overflow:hidden}
+#map{position:absolute;inset:0}
+.mapui{position:absolute;z-index:5;pointer-events:none}.mapui>*{pointer-events:auto}
+.glass{background:var(--panel);border:1px solid var(--bd);border-radius:14px;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);box-shadow:var(--sh)}
+.mtop{left:12px;top:12px;right:12px}
+#layerChips{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding:6px;max-width:100%;width:max-content}#layerChips::-webkit-scrollbar{display:none}
+#layerChips button{white-space:nowrap;border:1px solid transparent;background:none;padding:6px 12px;border-radius:9px;color:var(--mut);font-weight:600;font-size:.8rem}
+#layerChips button[aria-pressed=true]{background:linear-gradient(135deg,rgba(53,212,255,.3),rgba(45,226,192,.2));color:var(--tx);border-color:var(--bd)}
+.mtools{left:12px;top:70px;display:flex;flex-direction:column;gap:8px}
+.mtools .ibtn[aria-pressed=true]{border-color:var(--ac);box-shadow:0 0 12px rgba(53,212,255,.5)}
+.mbot{left:12px;right:12px;bottom:26px;display:flex;gap:12px;align-items:flex-end;flex-wrap:wrap}
+#legend{padding:10px 14px;min-width:220px;max-width:100%}#legend h4{font-size:.74rem;text-transform:uppercase;letter-spacing:.08em;color:var(--mut);margin-bottom:6px}
+.lg{display:flex;gap:0;border-radius:6px;overflow:hidden}.lg span{flex:1;height:8px;min-width:26px}.ll{display:flex;font-size:.66rem;color:var(--mut);margin-top:3px}.ll span{flex:1;min-width:26px;text-align:center}
+#tl{flex:1;min-width:260px;max-width:560px;padding:10px 14px;display:flex;gap:12px;align-items:center}#tl .tlb{flex:1;min-width:0}#tl small{display:block;margin-top:2px}
+#side{position:absolute;z-index:6;right:12px;top:12px;bottom:12px;width:var(--panelw);max-width:calc(100vw - 24px);overflow:auto;padding:18px;animation:pg .35s both}
+.sideh{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:10px}.sideh h2{font-size:1.35rem}
+.panel-open .maplibregl-ctrl-top-right{right:calc(var(--panelw) + 14px)}.maplibregl-ctrl-top-right{top:58px}
+.maplibregl-ctrl-attrib{font-size:10px}
+.mk{border:0;background:none;padding:0;display:flex;flex-direction:column;align-items:center;cursor:pointer;transform:translateY(0)}
+.mk .mv{background:var(--c);color:#041018;font:800 11px/1 Inter;padding:4px 7px;border-radius:99px;box-shadow:0 0 0 2px rgba(0,0,0,.35),0 0 14px color-mix(in srgb,var(--c) 70%,transparent);min-width:22px;text-align:center;white-space:nowrap;transition:transform .15s}
+.mk:hover .mv,.mk:focus-visible .mv{transform:scale(1.25)}.mk .mn{display:none;margin-top:3px;font:600 10px Inter;color:#fff;text-shadow:0 1px 3px #000,0 0 6px #000;white-space:nowrap}
+.mk.sel .mv{transform:scale(1.35);box-shadow:0 0 0 2px #fff,0 0 20px var(--c)}.mk.sel,.mk:hover,.mk:focus-visible{z-index:5}.mk.sel .mn,.mk:hover .mn,.mk:focus-visible .mn{display:block}
+.z-hi .mk .mn{display:block}.z-lo .mk:not(.sel):not(:hover) .mv{font-size:0;padding:5px;min-width:0}.mk.hid{display:none}
+.arr{display:inline-block;font-style:normal;margin-right:2px}
+[data-theme=light] .mk .mn{color:#06202e;text-shadow:0 0 4px #fff,0 0 4px #fff}
+#mapFail{position:absolute;inset:0;display:grid;place-content:center;text-align:center;padding:20px;z-index:4}
+@media(max-width:760px){
+ :root{--panelw:100vw}.search{width:150px}.brand small{display:none}
+ #side{right:0;left:0;top:auto;bottom:0;width:100%;max-width:none;height:56%;border-radius:20px 20px 0 0}
+ .panel-open .mbot{display:none}.maplibregl-ctrl-top-right{display:none}.mtools{top:62px}
+ .tools{gap:5px}.ibtn{width:34px;height:34px}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body data-page="overview">
+<a class="skip" href="#main">Skip to content</a>
+<noscript><p style="padding:20px">AQI Monitor needs JavaScript to run.</p></noscript>
+<div id="boot" role="status" aria-live="polite"><div class="rings"><i></i><i></i><i></i></div><div style="font:800 1.2rem Manrope;letter-spacing:.2em">AQI MONITOR</div><small>Synchronising global environmental data…</small></div>
+
+<header id="hdr">
+  <a class="brand" href="#/overview" aria-label="AQI Monitor home">
+    <svg class="logo" viewBox="0 0 40 40" aria-hidden="true"><defs><linearGradient id="lg" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#35d4ff"/><stop offset="1" stop-color="#2de2c0"/></linearGradient></defs><circle cx="20" cy="20" r="16" fill="none" stroke="url(#lg)" stroke-width="2"/><path d="M4 20h8l3-8 5 18 4-14 3 4h9" fill="none" stroke="url(#lg)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <span><span><b>AQI</b> Monitor</span><small>Global Environmental Intelligence</small></span>
+  </a>
+  <nav id="nav" aria-label="Primary">
+    <a href="#/overview" data-page="overview">Overview</a>
+    <a href="#/map" data-page="map">Global Map</a>
+    <a href="#/air" data-page="air">Air Quality</a>
+    <a href="#/sound" data-page="sound">Sound Quality</a>
+    <a href="#/analysis" data-page="analysis">Pollution Analysis</a>
+    <a href="#/travel" data-page="travel">Travel Intelligence</a>
+    <a href="#/trends" data-page="trends">Historical Trends</a>
+    <a href="#/compare" data-page="compare">Compare</a>
+    <span class="menuwrap"><button id="btnMore" aria-haspopup="true" aria-expanded="false">About Data ▾</button>
+      <div class="menu" id="moreMenu" hidden role="menu">
+        <a href="#/country" data-page="country" role="menuitem">Country Profile</a>
+        <a href="#/region" data-page="region" role="menuitem">State / Regional Profile</a>
+        <a href="#/sources" data-page="sources" role="menuitem">Data Sources</a>
+        <a href="#/method" data-page="method" role="menuitem">Methodology &amp; Standards</a>
+        <a href="#/privacy" data-page="privacy" role="menuitem">Privacy Policy</a>
+      </div></span>
+  </nav>
+  <div class="tools">
+    <div class="search"><i data-lucide="search"></i>
+      <input id="q" type="search" placeholder="Search any city…" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="sugg" aria-autocomplete="list" aria-label="Search location">
+      <ul id="sugg" role="listbox" hidden></ul></div>
+    <button class="ibtn" id="btnTheme" aria-label="Toggle dark / light mode" title="Theme"><i data-lucide="sun-moon"></i></button>
+    <button class="ibtn" id="btnAlerts" aria-label="Alerts and monitored cities" title="Alerts"><i data-lucide="bell"></i><span class="dot" hidden></span></button>
+    <div style="position:relative">
+      <button class="ibtn" id="btnAudio" aria-label="Audio settings" aria-haspopup="true" aria-expanded="false" title="Audio"><i data-lucide="volume-x"></i></button>
+      <div class="pop" id="audPop" hidden role="group" aria-label="Audio controls">
+        <h4>Audio</h4>
+        <div class="row"><span>Ambient music</span><button class="sw" id="swMusic" role="switch" aria-pressed="false" aria-label="Ambient music"></button></div>
+        <div class="row"><span>Sound effects</span><button class="sw" id="swSfx" role="switch" aria-pressed="true" aria-label="Sound effects"></button></div>
+        <div class="row"><span>Mute all</span><button class="sw" id="swMute" role="switch" aria-pressed="false" aria-label="Mute all audio"></button></div>
+        <label class="f" for="vol">Volume</label><input type="range" id="vol" min="0" max="100" value="35" aria-label="Master volume">
+        <p class="note" style="margin-bottom:0">Music is original generative ambient audio (Web Audio) and only starts when you switch it on.</p>
+      </div>
+    </div>
+  </div>
+</header>
+<div id="netBanner" role="alert" hidden></div>
+
+<main id="main">
+  <section class="page active" id="p-overview" aria-label="Global dashboard"></section>
+  <section class="page" id="p-map" aria-label="Interactive world map">
+    <div id="map" role="application" aria-label="World map. Use markers to open city details."></div>
+    <div id="mapFail" hidden><div class="card"><h2>Map could not load</h2><p class="mut">The MapLibre library or map tiles could not be reached. Check your connection — all other sections still work from the city selector.</p></div></div>
+    <div class="mapui mtop"><div id="layerChips" class="glass" role="group" aria-label="Map layers"></div></div>
+    <div class="mapui mtools">
+      <button class="ibtn glass" id="mGlobe" aria-pressed="false" aria-label="Toggle 3D globe view" title="3D globe"><i data-lucide="globe"></i></button>
+      <button class="ibtn glass" id="mReset" aria-label="Reset world view" title="Reset view"><i data-lucide="home"></i></button>
+      <button class="ibtn glass" id="mProbe" aria-pressed="false" aria-label="Probe any point on the map" title="Probe any point (click map)"><i data-lucide="crosshair"></i></button>
+      <select class="glass" id="mFilter" aria-label="Marker filter" style="width:46px;padding:6px 2px" title="Filter markers by US AQI"><option value="0">All</option><option value="1">≥ Mod</option><option value="2">≥ USG</option><option value="3">≥ Unh</option></select>
+    </div>
+    <aside id="side" class="glass" hidden aria-label="Details panel"><div id="sideBody"></div></aside>
+    <div class="mapui mbot">
+      <div id="legend" class="glass" aria-live="polite"></div>
+      <div id="tl" class="glass">
+        <button class="ibtn" id="tlPlay" aria-label="Play timeline" title="Play / pause"><i data-lucide="play"></i></button>
+        <div class="tlb"><input type="range" id="tlRange" min="0" max="0" value="0" aria-label="Map timeline hour"><small id="tlLabel" class="mut">Timeline loading…</small></div>
+        <button class="btn sm" id="tlNow">Now</button>
+      </div>
+    </div>
+  </section>
+  <section class="page" id="p-air" aria-label="Air quality intelligence"></section>
+  <section class="page" id="p-sound" aria-label="Sound quality intelligence"></section>
+  <section class="page" id="p-analysis" aria-label="Pollution cause analysis"></section>
+  <section class="page" id="p-travel" aria-label="Travel intelligence"></section>
+  <section class="page" id="p-trends" aria-label="Historical trends"></section>
+  <section class="page" id="p-compare" aria-label="City comparison"></section>
+  <section class="page" id="p-country" aria-label="Country profile"></section>
+  <section class="page" id="p-region" aria-label="Regional profile"></section>
+  <section class="page" id="p-sources" aria-label="Data sources"></section>
+  <section class="page" id="p-method" aria-label="Methodology and standards"></section>
+  <section class="page" id="p-privacy" aria-label="Privacy policy"></section>
+</main>
+<footer>AQI Monitor · Air data: Open-Meteo / Copernicus CAMS (modelled) · Basemap © OpenStreetMap contributors © CARTO · Boundaries: Natural Earth · Not a substitute for official health or travel advice.</footer>
+
+<dialog id="alertDlg" aria-labelledby="alertTitle"></dialog>
+<div id="toasts" aria-live="polite" aria-atomic="false"></div>
+
+<script src="https://unpkg.com/maplibre-gl@5.6.0/dist/maplibre-gl.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js" defer></script>
+<script src="https://unpkg.com/lucide@0.263.1/dist/umd/lucide.min.js" defer></script>
+<script defer>
+'use strict';
+window.addEventListener('DOMContentLoaded',()=>{ /* libs are deferred; wait for load */ });
+window.addEventListener('load',()=>{ try{ main(); }catch(e){ console.error(e); document.getElementById('boot')?.classList.add('out'); } });
+
+/* =====================================================================
+   0. CONFIG, UTILITIES
+   API keys are NEVER hard-coded. Optional keys (OpenAQ, WAQI, NASA FIRMS)
+   are entered by the user on the Data Sources page and kept only in this
+   browser's localStorage. For production use a server-side proxy.
+   ===================================================================== */
+const CFG={
+  AQ:'https://air-quality-api.open-meteo.com/v1/air-quality',
+  WX:'https://api.open-meteo.com/v1/forecast',
+  GEO:'https://geocoding-api.open-meteo.com/v1/search',
+  COUNTRIES:'https://cdn.jsdelivr.net/gh/nvkelso/natural-earth-vector@master/geojson/ne_110m_admin_0_countries.geojson',
+  TRAVEL:'https://www.travel-advisory.info/api',
+  OPENAQ:'https://api.openaq.org/v3',
+  WAQI:'https://api.waqi.info',
+  FIRMS:'https://firms.modaps.eosdis.nasa.gov/api/area/csv',
+  REFRESH_MS:15*60*1000,
+  AQ_START:'2022-07-29'
+};
+const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
+const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+const clamp=(v,a,b)=>Math.min(b,Math.max(a,v));
+const fmt=(v,d=0)=>(v==null||Number.isNaN(+v))?'—':(+v).toFixed(d);
+const flag=cc=>cc&&cc.length===2?String.fromCodePoint(...[...cc.toUpperCase()].map(ch=>127397+ch.charCodeAt(0))):'🌐';
+const debounce=(f,ms)=>{let t;return(...a)=>{clearTimeout(t);t=setTimeout(()=>f(...a),ms)}};
+const mkStore=st=>({get(k,d){try{const v=st.getItem(k);return v==null?d:JSON.parse(v)}catch{return d}},set(k,v){try{st.setItem(k,JSON.stringify(v))}catch{}}});
+const store=mkStore(window.localStorage), sess=mkStore(window.sessionStorage);
+const compass=d=>d==null?'—':['N','NNE','NE','ENE','E','ESE','SE','SSE','S','SSW','SW','WSW','W','WNW','NW','NNW'][Math.round(d/22.5)%16];
+const fmtTime=ts=>new Date(ts*1000).toLocaleString([],{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'});
+const fmtDay=ts=>new Date(ts*1000).toLocaleDateString([],{day:'numeric',month:'short',timeZone:'UTC'});
+const icons=()=>{try{window.lucide&&lucide.createIcons()}catch{}};
+const badge=t=>({mod:'<span class="badge b-mod" title="Computed by an atmospheric model, not a sensor reading">Modelled</span>',mea:'<span class="badge b-mea" title="Reported by a monitoring station">Measured</span>',fc:'<span class="badge b-fc" title="Model forecast for a future time">Forecast</span>',na:'<span class="badge b-na">Unavailable</span>',ctx:'<span class="badge b-ctx" title="General background knowledge, not verified for this location">Contextual</span>'}[t]||'');
+const sub=n=>String(n).replace(/2/g,'₂');
+
+/* =====================================================================
+   1. STATE & REGISTRIES
+   ===================================================================== */
+const SEED=[
+['mumbai','Mumbai','IN','India','Maharashtra',19.076,72.878],['delhi','Delhi','IN','India','Delhi',28.614,77.209],['kolkata','Kolkata','IN','India','West Bengal',22.572,88.364],['chennai','Chennai','IN','India','Tamil Nadu',13.083,80.271],['bengaluru','Bengaluru','IN','India','Karnataka',12.972,77.594],['hyderabad','Hyderabad','IN','India','Telangana',17.385,78.487],['pune','Pune','IN','India','Maharashtra',18.52,73.857],
+['lahore','Lahore','PK','Pakistan','Punjab',31.55,74.344],['karachi','Karachi','PK','Pakistan','Sindh',24.861,67.01],['dhaka','Dhaka','BD','Bangladesh','Dhaka',23.811,90.412],['kathmandu','Kathmandu','NP','Nepal','Bagmati',27.717,85.324],['colombo','Colombo','LK','Sri Lanka','Western',6.927,79.861],
+['beijing','Beijing','CN','China','Beijing',39.904,116.407],['shanghai','Shanghai','CN','China','Shanghai',31.23,121.474],['hongkong','Hong Kong','HK','Hong Kong','Hong Kong',22.319,114.169],['tokyo','Tokyo','JP','Japan','Tokyo',35.689,139.692],['osaka','Osaka','JP','Japan','Osaka',34.694,135.502],['seoul','Seoul','KR','South Korea','Seoul',37.566,126.978],['taipei','Taipei','TW','Taiwan','Taipei',25.033,121.565],
+['bangkok','Bangkok','TH','Thailand','Bangkok',13.756,100.502],['hanoi','Hanoi','VN','Vietnam','Hanoi',21.028,105.854],['hcmc','Ho Chi Minh City','VN','Vietnam','Ho Chi Minh',10.823,106.629],['jakarta','Jakarta','ID','Indonesia','Jakarta',-6.209,106.846],['manila','Manila','PH','Philippines','Metro Manila',14.6,120.984],['singapore','Singapore','SG','Singapore','Singapore',1.352,103.82],['kualalumpur','Kuala Lumpur','MY','Malaysia','Kuala Lumpur',3.139,101.687],
+['dubai','Dubai','AE','United Arab Emirates','Dubai',25.205,55.271],['riyadh','Riyadh','SA','Saudi Arabia','Riyadh',24.714,46.675],['tehran','Tehran','IR','Iran','Tehran',35.689,51.389],['istanbul','Istanbul','TR','Türkiye','Istanbul',41.008,28.978],['cairo','Cairo','EG','Egypt','Cairo',30.044,31.236],
+['lagos','Lagos','NG','Nigeria','Lagos',6.524,3.379],['nairobi','Nairobi','KE','Kenya','Nairobi',-1.286,36.82],['johannesburg','Johannesburg','ZA','South Africa','Gauteng',-26.204,28.047],['capetown','Cape Town','ZA','South Africa','Western Cape',-33.925,18.424],['accra','Accra','GH','Ghana','Greater Accra',5.604,-0.187],['addis','Addis Ababa','ET','Ethiopia','Addis Ababa',9.03,38.74],['casablanca','Casablanca','MA','Morocco','Casablanca-Settat',33.573,-7.589],
+['london','London','GB','United Kingdom','England',51.507,-0.128],['paris','Paris','FR','France','Île-de-France',48.857,2.352],['berlin','Berlin','DE','Germany','Berlin',52.52,13.405],['madrid','Madrid','ES','Spain','Madrid',40.417,-3.704],['rome','Rome','IT','Italy','Lazio',41.903,12.496],['milan','Milan','IT','Italy','Lombardy',45.464,9.19],['warsaw','Warsaw','PL','Poland','Masovia',52.23,21.012],['krakow','Kraków','PL','Poland','Lesser Poland',50.065,19.945],['moscow','Moscow','RU','Russia','Moscow',55.756,37.617],['stockholm','Stockholm','SE','Sweden','Stockholm',59.329,18.069],['athens','Athens','GR','Greece','Attica',37.984,23.728],['amsterdam','Amsterdam','NL','Netherlands','North Holland',52.37,4.895],['reykjavik','Reykjavík','IS','Iceland','Capital Region',64.147,-21.942],
+['sydney','Sydney','AU','Australia','New South Wales',-33.869,151.209],['melbourne','Melbourne','AU','Australia','Victoria',-37.814,144.963],['auckland','Auckland','NZ','New Zealand','Auckland',-36.849,174.763],
+['newyork','New York','US','United States','New York',40.713,-74.006],['losangeles','Los Angeles','US','United States','California',34.052,-118.244],['chicago','Chicago','US','United States','Illinois',41.878,-87.63],['houston','Houston','US','United States','Texas',29.76,-95.37],['honolulu','Honolulu','US','United States','Hawaii',21.307,-157.858],['toronto','Toronto','CA','Canada','Ontario',43.653,-79.383],['vancouver','Vancouver','CA','Canada','British Columbia',49.283,-123.121],['mexicocity','Mexico City','MX','Mexico','Mexico City',19.433,-99.133],
+['saopaulo','São Paulo','BR','Brazil','São Paulo',-23.551,-46.633],['rio','Rio de Janeiro','BR','Brazil','Rio de Janeiro',-22.907,-43.173],['buenosaires','Buenos Aires','AR','Argentina','Buenos Aires',-34.604,-58.382],['santiago','Santiago','CL','Chile','Santiago',-33.449,-70.669],['lima','Lima','PE','Peru','Lima',-12.046,-77.043],['bogota','Bogotá','CO','Colombia','Bogotá',4.711,-74.072]
+];
+const PORTS=new Set(['mumbai','chennai','shanghai','hongkong','singapore','dubai','istanbul','losangeles','houston','newyork','sydney','jakarta','karachi','osaka','tokyo','rio','saopaulo','lagos']);
+const EMERG={IN:'112 (all emergencies) · 100 police · 108 ambulance',US:'911',GB:'999 or 112',FR:'112 · 15 medical · 17 police',DE:'112 (fire/medical) · 110 police',ES:'112',IT:'112',PL:'112',NL:'112',SE:'112',GR:'112',IS:'112',RU:'112',JP:'110 police · 119 fire/ambulance',CN:'110 police · 120 ambulance · 119 fire',HK:'999',KR:'112 police · 119 fire/ambulance',TW:'110 police · 119 fire/ambulance',TH:'191 police · 1669 medical',VN:'113 police · 115 ambulance',ID:'112',PH:'911',SG:'999 police · 995 ambulance/fire',MY:'999',AE:'999 police · 998 ambulance',SA:'911',IR:'110 police · 115 ambulance',TR:'112',EG:'122 police · 123 ambulance',NG:'112',KE:'999 or 112',ZA:'10111 police · 10177 ambulance · 112 from mobile',GH:'112',MA:'19 police · 15 fire/ambulance',AU:'000',NZ:'111',CA:'911',MX:'911',BR:'190 police · 192 ambulance',AR:'911',CL:'133 police · 131 ambulance',PE:'105 police · 116 fire',CO:'123',PK:'15 police · 1122 rescue',BD:'999',NP:'100 police · 102 ambulance',LK:'119 police · 1990 ambulance'};
+const S={
+  cities:SEED.map(([id,name,cc,country,state,lat,lon])=>({id,name,cc,country,state,lat,lon})),
+  data:{},detail:{},fires:{},measured:{},
+  sel:'mumbai',std:sess.get('ep_std',null)||store.get('ep_std','US'),layer:'aqi',page:'overview',
+  theme:store.get('ep_theme',matchMedia('(prefers-color-scheme: light)').matches?'light':'dark'),
+  adv:null,advTried:false,geo:null,loaded:false,lastSync:null,
+  tl:{t:null,playing:false,timer:null},tlTs:null,
+  watch:store.get('ep_watch',[]),
+  alertCfg:Object.assign({aqi:150,pm25:55,advisory:true,notify:false,email:''},store.get('ep_alertcfg',{})),
+  alerted:{},
+  keys:Object.assign({openaq:'',waqi:'',firms:''},store.get('ep_keys',{})),
+  filter:0,probe:false,
+  cmp:['mumbai','delhi','london','tokyo'],
+  country:null,region:null,
+  rank:'cleanest',trend:{range:'30d',v:'pm2_5'},aScope:'city'
+};
+const cityById=id=>S.cities.find(c=>c.id===id);
+const cur=()=>cityById(S.sel)||S.cities[0];
+const countryName=cc=>S.cities.find(c=>c.cc===cc)?.country||(S.geo&&S.geo.features.find(f=>f.properties.iso===cc)?.properties.cname)||cc;
+
+/* ---- data-source registry (country specific) ---- */
+const REG=[
+ {id:'om-aq',cc:'ALL',name:'Open-Meteo Air Quality API (Copernicus CAMS)',provider:'Open-Meteo.com · CAMS / ECMWF',endpoint:'https://air-quality-api.open-meteo.com/v1/air-quality',docs:'https://open-meteo.com/en/docs/air-quality-api',licence:'CC BY 4.0 (data); free API for non-commercial use',auth:'None',pollutants:'PM2.5, PM10, NO₂, SO₂, CO, O₃, dust, AOD, US & European AQI',freq:'Hourly',hist:'Global from 2022-07-29',type:'mod',live:true},
+ {id:'om-wx',cc:'ALL',name:'Open-Meteo Weather Forecast API',provider:'Open-Meteo.com (NOAA/DWD/ECMWF…)',endpoint:'https://api.open-meteo.com/v1/forecast',docs:'https://open-meteo.com/',licence:'CC BY 4.0; free for non-commercial use',auth:'None',pollutants:'Temperature, humidity, wind, visibility, boundary-layer height',freq:'Hourly',hist:'Past days via same API',type:'mod',live:true},
+ {id:'om-geo',cc:'ALL',name:'Open-Meteo Geocoding API',provider:'Open-Meteo.com (GeoNames)',endpoint:'https://geocoding-api.open-meteo.com/v1/search',docs:'https://open-meteo.com/en/docs/geocoding-api',licence:'CC BY 4.0 (GeoNames)',auth:'None',pollutants:'—',freq:'n/a',hist:'n/a',type:'ref',live:true},
+ {id:'openaq',cc:'ALL',name:'OpenAQ v3 (measured stations)',provider:'OpenAQ',endpoint:'https://api.openaq.org/v3',docs:'https://docs.openaq.org/',licence:'Open data; licences vary per provider',auth:'API key (optional, user-supplied)',pollutants:'PM2.5, PM10, NO₂, SO₂, CO, O₃ (varies by station)',freq:'Near real-time',hist:'Yes (API)',type:'mea',live:true,key:'openaq'},
+ {id:'waqi',cc:'ALL',name:'World Air Quality Index (WAQI)',provider:'aqicn.org',endpoint:'https://api.waqi.info',docs:'https://aqicn.org/api/',licence:'Attribution required; see aqicn.org/api/tos',auth:'Token (optional, user-supplied)',pollutants:'AQI, PM2.5, PM10, NO₂, SO₂, CO, O₃',freq:'Hourly',hist:'Limited',type:'mea',live:true,key:'waqi'},
+ {id:'firms',cc:'ALL',name:'NASA FIRMS active fires (VIIRS NRT)',provider:'NASA LANCE / FIRMS',endpoint:'https://firms.modaps.eosdis.nasa.gov/api/area/csv/{MAP_KEY}/VIIRS_SNPP_NRT/{bbox}/1',docs:'https://firms.modaps.eosdis.nasa.gov/api/',licence:'NASA open data',auth:'MAP_KEY (optional, user-supplied)',pollutants:'Fire detections (not smoke concentration)',freq:'~3 h',hist:'Yes (API)',type:'mea',live:true,key:'firms'},
+ {id:'travel',cc:'ALL',name:'Travel Advisory aggregator (travel-advisory.info)',provider:'travel-advisory.info (aggregates government advisories)',endpoint:'https://www.travel-advisory.info/api',docs:'https://www.travel-advisory.info/api',licence:'See site terms (attribution)',auth:'None',pollutants:'Composite risk score 0–5',freq:'Daily',hist:'No',type:'ref',live:true},
+ {id:'geo-countries',cc:'ALL',name:'Natural Earth country boundaries',provider:'Natural Earth (via jsDelivr)',endpoint:CFG.COUNTRIES,docs:'https://www.naturalearthdata.com/',licence:'Public domain',auth:'None',pollutants:'—',freq:'Static',hist:'n/a',type:'ref',live:true},
+ {id:'cams',cc:'ALL',name:'Copernicus Atmosphere Monitoring Service (direct ADS)',provider:'ECMWF / Copernicus',endpoint:'—',docs:'https://atmosphere.copernicus.eu/',licence:'Copernicus licence',auth:'ADS account',pollutants:'Global reanalysis & forecasts',freq:'Daily',hist:'2003+',type:'mod',live:false},
+ {id:'noaa',cc:'ALL',name:'NOAA (weather & smoke products)',provider:'NOAA',endpoint:'—',docs:'https://www.noaa.gov/',licence:'US public domain',auth:'Varies',pollutants:'Weather, HMS smoke',freq:'Varies',hist:'Yes',type:'mod',live:false},
+ {id:'cpcb',cc:'IN',name:'CPCB — Central Pollution Control Board (CAAQMS)',provider:'Government of India',endpoint:'https://app.cpcbccr.com/AQIIndia',docs:'https://cpcb.nic.in/',licence:'Government of India open-data policy',auth:'No public CORS API',pollutants:'AQI, PM2.5, PM10, NO₂, SO₂, CO, O₃, NH₃',freq:'Hourly',hist:'Yes (portal)',type:'mea',live:false},
+ {id:'datagov',cc:'IN',name:'Data.gov.in air-quality resources',provider:'Government of India',endpoint:'https://www.data.gov.in/',docs:'https://www.data.gov.in/',licence:'GODL-India',auth:'API key',pollutants:'Station-level pollutant data',freq:'Varies',hist:'Yes',type:'mea',live:false},
+ {id:'xkdr',cc:'IN',name:'XKDR Air-Quality-Database',provider:'xKDR Forum',endpoint:'—',docs:'https://github.com/xKDR/Air-Quality-Database',licence:'See repository',auth:'None (dataset)',pollutants:'Historical CPCB-derived panel',freq:'Static',hist:'Multi-year',type:'mea',live:false},
+ {id:'airnow',cc:'US',name:'US EPA AirNow',provider:'US EPA',endpoint:'https://www.airnowapi.org/',docs:'https://docs.airnowapi.org/',licence:'US public domain',auth:'API key',pollutants:'AQI, PM2.5, O₃, etc.',freq:'Hourly',hist:'Yes',type:'mea',live:false},
+ {id:'ukair',cc:'GB',name:'UK-AIR (Defra)',provider:'Defra / UK Government',endpoint:'https://uk-air.defra.gov.uk/',docs:'https://uk-air.defra.gov.uk/',licence:'Open Government Licence',auth:'None',pollutants:'Full UK network',freq:'Hourly',hist:'Yes',type:'mea',live:false},
+ {id:'eea',cc:'EU',name:'European Environment Agency — air & noise data',provider:'EEA',endpoint:'—',docs:'https://www.eea.europa.eu/themes/air',licence:'EEA standard re-use',auth:'None',pollutants:'Air-quality e-Reporting; END noise (Lden/Lnight) mapping',freq:'Annual (noise) / hourly (air)',hist:'Yes',type:'mea',live:false}
+];
+const EU_CC=new Set(['AT','BE','BG','HR','CY','CZ','DK','EE','FI','FR','DE','GR','HU','IE','IT','LV','LT','LU','MT','NL','PL','PT','RO','SK','SI','ES','SE','IS','NO','CH']);
+const Reg={status:{},mark(id,ok,err){this.status[id]={ok,t:Date.now(),err:err?String(err.message||err):null}}};
+
+/* =====================================================================
+   2. NETWORK (cache, retry, rate-limit backoff)
+   ===================================================================== */
+const Net={mem:new Map(),
+ async json(url,{ttl=900000,headers,src,text}={}){
+  const hit=this.mem.get(url); if(hit&&Date.now()-hit.t<ttl) return hit.v;
+  let last;
+  for(let a=0;a<3;a++){
+   try{
+    const ctl=new AbortController(); const to=setTimeout(()=>ctl.abort(),22000);
+    const r=await fetch(url,{headers,signal:ctl.signal}); clearTimeout(to);
+    if(r.status===429){last=new Error('Rate limited (HTTP 429)'); await sleep(1500*(a+1)); continue}
+    if(!r.ok) throw new Error('HTTP '+r.status);
+    const v=text?await r.text():await r.json(); this.mem.set(url,{t:Date.now(),v}); if(src)Reg.mark(src,true); return v;
+   }catch(e){last=e; if(a<2) await sleep(600*(a+1));}
+  }
+  if(src)Reg.mark(src,false,last); throw last;
+ }};
+
+/* =====================================================================
+   3. AQI STANDARDS & CALCULATION
+   US EPA / European EAQI values are computed by Open-Meteo from CAMS data.
+   Indian National AQI is computed here from the CPCB breakpoints.
+   ===================================================================== */
+const PAL=['#22d3a0','#b6e34a','#ffc247','#ff7a45','#f0425b','#a23cdb'];
+const STD={
+ US:{name:'US EPA AQI',max:500,cats:[[50,'Good'],[100,'Moderate'],[150,'Unhealthy for Sensitive Groups'],[200,'Unhealthy'],[300,'Very Unhealthy'],[Infinity,'Hazardous']],note:'US EPA AQI as computed by Open-Meteo from modelled CAMS concentrations.'},
+ EU:{name:'European AQI (EAQI)',max:120,cats:[[20,'Good'],[40,'Fair'],[60,'Moderate'],[80,'Poor'],[100,'Very Poor'],[Infinity,'Extremely Poor']],note:'European Air Quality Index (EEA) as computed by Open-Meteo from modelled CAMS concentrations.'},
+ IN:{name:'Indian National AQI (CPCB)',max:500,cats:[[50,'Good'],[100,'Satisfactory'],[200,'Moderate'],[300,'Poor'],[400,'Very Poor'],[Infinity,'Severe']],note:'Calculated in this app using CPCB sub-index breakpoints on modelled CAMS concentrations (PM 24-h mean, NO₂/SO₂ 24-h mean, CO & O₃ 8-h mean). NH₃ and Pb are not available, so the result may differ from the official CPCB station AQI.'}
+};
+function catOf(std,v){ if(v==null||Number.isNaN(v)) return {level:-1,label:'No data',color:'#7c8aa0'}; const cs=STD[std].cats; for(let i=0;i<cs.length;i++) if(v<=cs[i][0]) return {level:i,label:cs[i][1],color:PAL[i]}; return {level:5,label:cs[5][1],color:PAL[5]}; }
+const BP_IN={
+ pm2_5:[[0,30,0,50],[30,60,50,100],[60,90,100,200],[90,120,200,300],[120,250,300,400],[250,380,400,500]],
+ pm10:[[0,50,0,50],[50,100,50,100],[100,250,100,200],[250,350,200,300],[350,430,300,400],[430,510,400,500]],
+ nitrogen_dioxide:[[0,40,0,50],[40,80,50,100],[80,180,100,200],[180,280,200,300],[280,400,300,400],[400,500,400,500]],
+ sulphur_dioxide:[[0,40,0,50],[40,80,50,100],[80,380,100,200],[380,800,200,300],[800,1600,300,400],[1600,2000,400,500]],
+ ozone:[[0,50,0,50],[50,100,50,100],[100,168,100,200],[168,208,200,300],[208,748,300,400],[748,1000,400,500]],
+ co:[[0,1,0,50],[1,2,50,100],[2,10,100,200],[10,17,200,300],[17,34,300,400],[34,50,400,500]]
+};
+function subIdx(bp,c){ if(c==null) return null; for(const [cl,ch,il,ih] of bp){ if(c<=ch) return il+(ih-il)*(Math.max(c,cl)-cl)/(ch-cl); } return 500; }
+function runAvg(arr,i,n){ let s=0,k=0; for(let j=i-n+1;j<=i;j++){const v=arr[j]; if(v!=null){s+=v;k++}} return k>=Math.ceil(n*2/3)?s/k:null; }
+function indiaAQI(rec,i){
+ if(i==null||i<23) return null; const h=rec.h;
+ const subs={pm2_5:subIdx(BP_IN.pm2_5,runAvg(h.pm2_5,i,24)),pm10:subIdx(BP_IN.pm10,runAvg(h.pm10,i,24)),nitrogen_dioxide:subIdx(BP_IN.nitrogen_dioxide,runAvg(h.nitrogen_dioxide,i,24)),sulphur_dioxide:subIdx(BP_IN.sulphur_dioxide,runAvg(h.sulphur_dioxide,i,24)),ozone:subIdx(BP_IN.ozone,runAvg(h.ozone,i,8)),co:subIdx(BP_IN.co,(()=>{const a=runAvg(h.carbon_monoxide,i,8);return a==null?null:a/1000})())};
+ const e=Object.entries(subs).filter(([,v])=>v!=null);
+ if(e.length<3||(subs.pm2_5==null&&subs.pm10==null)) return null;
+ e.sort((a,b)=>b[1]-a[1]); return {aqi:Math.round(e[0][1]),dom:e[0][0],subs};
+}
+function idxFor(rec,t){ if(t==null) return rec.nowIdx; const i=Math.round((t-rec.ts[0])/3600); return i>=0&&i<rec.ts.length?i:null; }
+function aqiAt(rec,std,t){
+ if(!rec) return null;
+ if(t==null){ if(std==='US') return rec.cur.us_aqi; if(std==='EU') return rec.cur.european_aqi; const r=indiaAQI(rec,rec.nowIdx); return r?r.aqi:null; }
+ const i=idxFor(rec,t); if(i==null) return null;
+ if(std==='US') return rec.h.us_aqi[i]; if(std==='EU') return rec.h.european_aqi[i]; const r=indiaAQI(rec,i); return r?r.aqi:null;
+}
+const POL=[
+ {k:'pm2_5',label:'PM2.5',unit:'µg/m³',who:15,d:0,conv:1,note:'WHO 2021 24-h guideline'},
+ {k:'pm10',label:'PM10',unit:'µg/m³',who:45,d:0,conv:1,note:'WHO 2021 24-h guideline'},
+ {k:'nitrogen_dioxide',label:'NO₂',unit:'µg/m³',who:25,d:0,conv:1,note:'WHO 2021 24-h guideline'},
+ {k:'sulphur_dioxide',label:'SO₂',unit:'µg/m³',who:40,d:0,conv:1,note:'WHO 2021 24-h guideline'},
+ {k:'carbon_monoxide',label:'CO',unit:'mg/m³',who:4000,d:2,conv:.001,note:'WHO 2021 24-h guideline (4 mg/m³)'},
+ {k:'ozone',label:'O₃',unit:'µg/m³',who:100,d:0,conv:1,note:'WHO 2021 8-h peak-season guideline'}
+];
+const HEALTH=['Air quality is satisfactory; outdoor activity is generally fine.','Unusually sensitive people should consider reducing prolonged or heavy exertion outdoors.','Sensitive groups (children, older adults, people with heart or lung disease) should reduce prolonged or heavy exertion.','Everyone should reduce prolonged or heavy exertion; sensitive groups should avoid it outdoors.','Everyone should avoid prolonged or heavy exertion outdoors; sensitive groups should stay indoors.','Emergency-level air pollution: avoid outdoor exertion; use filtered indoor air.'];
+
+/* =====================================================================
+   4. DATA LAYER (Open-Meteo batch + detail + history)
+   ===================================================================== */
+const AQ_H='pm2_5,pm10,nitrogen_dioxide,sulphur_dioxide,carbon_monoxide,ozone,us_aqi,european_aqi';
+const AQ_C=AQ_H+',dust,aerosol_optical_depth';
+async function loadBatch(list){
+ for(let i=0;i<list.length;i+=30){
+  const ch=list.slice(i,i+30), lat=ch.map(c=>c.lat).join(','), lon=ch.map(c=>c.lon).join(',');
+  const [aq,wx]=await Promise.allSettled([
+   Net.json(`${CFG.AQ}?latitude=${lat}&longitude=${lon}&current=${AQ_C}&hourly=${AQ_H}&past_days=5&forecast_days=3&timeformat=unixtime&timezone=GMT`,{src:'om-aq'}),
+   Net.json(`${CFG.WX}?latitude=${lat}&longitude=${lon}&current=temperature_2m,relative_humidity_2m,apparent_temperature,wind_speed_10m,wind_direction_10m,is_day&timeformat=unixtime&timezone=GMT&wind_speed_unit=kmh`,{src:'om-wx'})]);
+  if(aq.status==='rejected') throw aq.reason;
+  const A=Array.isArray(aq.value)?aq.value:[aq.value]; const W=wx.status==='fulfilled'?(Array.isArray(wx.value)?wx.value:[wx.value]):[];
+  const now=Math.floor(Date.now()/1000);
+  ch.forEach((c,k)=>{
+   const a=A[k]; if(!a||!a.hourly) return;
+   const ts=a.hourly.time; let ni=0; for(let j=0;j<ts.length;j++) if(ts[j]<=now) ni=j;
+   const w=W[k]&&W[k].current;
+   S.data[c.id]={ts,h:a.hourly,cur:a.current||{},nowIdx:ni,fetched:Date.now(),wx:w?{temp:w.temperature_2m,hum:w.relative_humidity_2m,app:w.apparent_temperature,wind:w.wind_speed_10m,dir:w.wind_direction_10m,isDay:w.is_day,time:w.time}:null};
+  });
+ }
+ if(!S.tlTs){const f=Object.values(S.data)[0]; if(f) S.tlTs=f.ts;}
+}
+async function ensureDetail(c){
+ if(S.detail[c.id]&&Date.now()-S.detail[c.id].t<900000) return S.detail[c.id];
+ try{
+  const j=await Net.json(`${CFG.WX}?latitude=${c.lat}&longitude=${c.lon}&hourly=temperature_2m,apparent_temperature,relative_humidity_2m,wind_speed_10m,wind_direction_10m,visibility,boundary_layer_height,precipitation_probability&past_days=1&forecast_days=3&timeformat=unixtime&timezone=auto&wind_speed_unit=kmh`,{src:'om-wx'});
+  const H=j.hourly; S.detail[c.id]={t:Date.now(),ts:H.time,temp:H.temperature_2m,app:H.apparent_temperature,hum:H.relative_humidity_2m,wind:H.wind_speed_10m,dir:H.wind_direction_10m,vis:H.visibility,blh:H.boundary_layer_height,pp:H.precipitation_probability,off:j.utc_offset_seconds||0,tz:j.timezone_abbreviation||j.timezone||''};
+ }catch(e){ S.detail[c.id]={t:Date.now(),err:e.message}; }
+ return S.detail[c.id];
+}
+const dNow=(d,k)=>{ if(!d||!d.ts) return null; const now=Date.now()/1000; let ix=0; for(let i=0;i<d.ts.length;i++) if(d.ts[i]<=now) ix=i; return d[k]?d[k][ix]:null; };
+const HR={'24h':{d:1,agg:'h'},'7d':{d:7,agg:'h'},'30d':{d:30,agg:'d'},'6m':{d:182,agg:'d'},'1y':{d:365,agg:'d'}};
+async function loadHistory(c,range,v){
+ const R=HR[range], now=Math.floor(Date.now()/1000);
+ const base=`${CFG.AQ}?latitude=${c.lat}&longitude=${c.lon}&hourly=${v}&timeformat=unixtime&timezone=GMT`; let url;
+ if(R.agg==='h') url=`${base}&past_days=${R.d*2}&forecast_days=1`;
+ else{ const iso=t=>new Date(t*1000).toISOString().slice(0,10); let s=now-R.d*2*86400; const lim=Date.parse(CFG.AQ_START)/1000; if(s<lim) s=lim; url=`${base}&start_date=${iso(s)}&end_date=${iso(now)}`; }
+ const j=await Net.json(url,{ttl:3600000,src:'om-aq'});
+ const ts=j.hourly.time,val=j.hourly[v],cs=now-R.d*86400,ps=now-R.d*2*86400,cu=[],pr=[];
+ for(let i=0;i<ts.length;i++){ if(ts[i]>now||val[i]==null) continue; if(ts[i]>cs) cu.push([ts[i],val[i]]); else if(ts[i]>ps) pr.push([ts[i],val[i]]); }
+ return {cur:cu,prev:pr,agg:R.agg};
+}
+function aggDaily(pts){ const m=new Map(); pts.forEach(([t,v])=>{const d=Math.floor(t/86400); const o=m.get(d)||{s:0,n:0,mx:-1e9}; o.s+=v;o.n++;o.mx=Math.max(o.mx,v);m.set(d,o)}); return [...m.entries()].sort((a,b)=>a[0]-b[0]).map(([d,o])=>({t:d*86400,mean:o.s/o.n,max:o.mx})); }
+async function loadAdvisories(){
+ if(S.adv||S.advTried) return S.adv; S.advTried=true;
+ try{ const j=await Net.json(CFG.TRAVEL,{ttl:6*3600000,src:'travel'}); S.adv=j.data||null; }catch(e){ S.adv=null; }
+ return S.adv;
+}
+const advOf=cc=>S.adv&&S.adv[cc]&&S.adv[cc].advisory?S.adv[cc].advisory:null;
+async function loadFires(c){
+ if(!S.keys.firms) return null; const k=c.id; if(S.fires[k]&&Date.now()-S.fires[k].t<1800000) return S.fires[k];
+ const d=.45,bb=`${(c.lon-d).toFixed(3)},${(c.lat-d).toFixed(3)},${(c.lon+d).toFixed(3)},${(c.lat+d).toFixed(3)}`;
+ try{
+  const txt=await Net.json(`${CFG.FIRMS}/${encodeURIComponent(S.keys.firms)}/VIIRS_SNPP_NRT/${bb}/1`,{ttl:1800000,src:'firms',text:true});
+  const lines=txt.trim().split(/\r?\n/); if(lines.length<1||!/latitude/i.test(lines[0])) throw new Error(lines[0].slice(0,80)||'Unexpected FIRMS response');
+  const hd=lines[0].split(','), li=hd.indexOf('latitude'), lo=hd.indexOf('longitude'), fi=hd.indexOf('frp');
+  let n=0,near=1e9,frp=0; for(let i=1;i<lines.length;i++){const p=lines[i].split(','); if(p.length<hd.length) continue; n++; const la=+p[li],lb=+p[lo]; const dk=Math.hypot((la-c.lat)*111,(lb-c.lon)*111*Math.cos(c.lat*Math.PI/180)); near=Math.min(near,dk); frp+=fi>=0?+p[fi]||0:0;}
+  S.fires[k]={t:Date.now(),n,near:n?near:null,frp};
+ }catch(e){ S.fires[k]={t:Date.now(),err:e.message}; }
+ return S.fires[k];
+}
+async function loadMeasured(c){
+ const out={t:Date.now()};
+ if(S.keys.waqi){ try{ const j=await Net.json(`${CFG.WAQI}/feed/geo:${c.lat};${c.lon}/?token=${encodeURIComponent(S.keys.waqi)}`,{ttl:600000,src:'waqi'}); if(j.status==='ok') out.waqi=j.data; else out.waqiErr=typeof j.data==='string'?j.data:'Request rejected'; }catch(e){out.waqiErr=e.message} }
+ if(S.keys.openaq){ try{
+   const H={'X-API-Key':S.keys.openaq};
+   const l=await Net.json(`${CFG.OPENAQ}/locations?coordinates=${c.lat},${c.lon}&radius=25000&limit=3`,{headers:H,ttl:600000,src:'openaq'});
+   out.oaq=[];
+   for(const loc of (l.results||[]).slice(0,3)){
+    const sm={}; (loc.sensors||[]).forEach(s=>sm[s.id]=s.parameter||{});
+    let lat={}; try{ lat=await Net.json(`${CFG.OPENAQ}/locations/${loc.id}/latest`,{headers:H,ttl:600000,src:'openaq'}); }catch{}
+    out.oaq.push({name:loc.name,provider:loc.provider&&loc.provider.name,vals:(lat.results||[]).map(r=>({p:(sm[r.sensorsId]||{}).displayName||(sm[r.sensorsId]||{}).name||'?',u:(sm[r.sensorsId]||{}).units||'',v:r.value,t:r.datetime&&r.datetime.utc})) });
+   }
+  }catch(e){out.oaqErr=e.message} }
+ S.measured[c.id]=out; return out;
+}
+
+/* =====================================================================
+   5. LAYERS, SCALES, COMPOSITES
+   ===================================================================== */
+const LAYERS=[
+ {id:'aqi',name:'Overall AQI'},{id:'pm2_5',name:'PM2.5',pol:'pm2_5'},{id:'pm10',name:'PM10',pol:'pm10'},{id:'no2',name:'NO₂',pol:'nitrogen_dioxide'},{id:'so2',name:'SO₂',pol:'sulphur_dioxide'},{id:'co',name:'CO',pol:'carbon_monoxide'},{id:'o3',name:'O₃',pol:'ozone'},
+ {id:'noise',name:'Noise'},{id:'temp',name:'Temperature'},{id:'hum',name:'Humidity'},{id:'wind',name:'Wind'},{id:'fire',name:'Wildfire & Smoke'},{id:'risk',name:'Environmental Risk'},{id:'adv',name:'Travel Advisory'}
+];
+const polScale=(t,unit,title,pal=PAL)=>({unit,title,stops:t.map((m,i)=>({max:m,color:pal[i],label:i===0?'≤'+m:t[i-1]+'–'+m})).concat([{max:Infinity,color:pal[5],label:'>'+t[t.length-1]}])});
+function scaleFor(L){
+ switch(L){
+  case 'aqi':{const cs=STD[S.std].cats;return {unit:'AQI',title:STD[S.std].name,stops:cs.map((c,i)=>({max:c[0],color:PAL[i],label:c[1].replace('Unhealthy for Sensitive Groups','USG').replace('Very Unhealthy','V.Unh.').replace('Extremely Poor','Ext. Poor').replace('Satisfactory','Satisf.')}))}}
+  case 'pm2_5':return polScale([5,15,35,55,150],'µg/m³','PM2.5 (µg/m³) — WHO 24h guideline 15');
+  case 'pm10':return polScale([15,45,90,150,250],'µg/m³','PM10 (µg/m³) — WHO 24h guideline 45');
+  case 'no2':return polScale([10,25,100,200,400],'µg/m³','NO₂ (µg/m³) — WHO 24h guideline 25');
+  case 'so2':return polScale([20,40,125,350,500],'µg/m³','SO₂ (µg/m³) — WHO 24h guideline 40');
+  case 'co':return polScale([1,2,4,10,17],'mg/m³','CO (mg/m³) — WHO 24h guideline 4');
+  case 'o3':return polScale([60,100,120,160,240],'µg/m³','O₃ (µg/m³) — WHO 8h guideline 100');
+  case 'temp':return polScale([0,10,20,28,35],'°C','Temperature (°C)',['#3b82f6','#38bdf8','#34d399','#facc15','#fb923c','#ef4444']);
+  case 'hum':return polScale([20,35,55,75,90],'%','Relative humidity (%)',['#f59e0b','#facc15','#34d399','#38bdf8','#3b82f6','#6366f1']);
+  case 'wind':return polScale([10,20,30,45,60],'km/h','Wind speed (km/h)',['#34d399','#a3e635','#facc15','#fb923c','#ef4444','#a855f7']);
+  case 'risk':return polScale([20,40,60,80,90],'index','AQI Monitor composite risk (0–100)');
+  case 'adv':return {unit:'score',title:'Government advisory composite (0–5)',stops:[{max:2.5,color:PAL[0],label:'Low <2.5'},{max:3.5,color:PAL[2],label:'Medium 2.5–3.5'},{max:4.5,color:PAL[3],label:'High 3.5–4.5'},{max:Infinity,color:PAL[5],label:'Extreme >4.5'}]};
+  default:return {unit:'',title:L==='noise'?'Noise — no verified data':'Wildfire — needs NASA FIRMS key',stops:[{max:Infinity,color:'#7c8aa0',label:'Unavailable'}]};
+ }
+}
+const colorOf=(sc,v)=>{for(const s of sc.stops) if(v<=s.max) return s.color; return sc.stops[sc.stops.length-1].color;};
+function riskOf(c){
+ const rec=S.data[c.id]; if(!rec) return null; const us=rec.cur.us_aqi; const app=rec.wx?rec.wx.app:null;
+ const air=us==null?null:Math.min(100,us/3), heat=app==null?null:clamp((app-27)/14*100,0,100)*.8;
+ if(air==null&&heat==null) return null; return Math.round(Math.max(air||0,heat||0));
+}
+function LV(c,L,t){
+ const rec=S.data[c.id]; if(L==='adv'){const a=advOf(c.cc); return a?+a.score:null;} if(L==='noise'||L==='fire') return null; if(!rec) return null;
+ if(L==='aqi') return aqiAt(rec,S.std,t);
+ if(L==='risk') return riskOf(c);
+ if(L==='temp') return rec.wx?rec.wx.temp:null; if(L==='hum') return rec.wx?rec.wx.hum:null; if(L==='wind') return rec.wx?rec.wx.wind:null;
+ const d=LAYERS.find(x=>x.id===L); if(!d||!d.pol) return null; const k=d.pol, conv=k==='carbon_monoxide'?.001:1;
+ let v; if(t==null) v=rec.cur[k]; else{const i=idxFor(rec,t); v=i==null?null:rec.h[k][i];} return v==null?null:v*conv;
+}
+
+/* =====================================================================
+   6. AUDIO — original generative ambient music + Web Audio UI sounds
+   ===================================================================== */
+const Snd=(()=>{
+ let ctx,master,music,fx,verb,wet,musicOn=false,timers=[],last=0,lastZoom=0,bus=null,unlocked=false,cb=()=>{};
+ const st=Object.assign({vol:.35,sfx:true,muted:false},sess.get('ep_aud',{}));
+ const save=()=>sess.set('ep_aud',{vol:st.vol,sfx:st.sfx,muted:st.muted});
+ const mf=n=>440*Math.pow(2,(n-69)/12);
+ function init(){
+  if(ctx) return true; const AC=window.AudioContext||window.webkitAudioContext; if(!AC) return false;
+  try{ctx=new AC()}catch{return false}
+  master=ctx.createGain(); master.gain.value=st.muted?0:st.vol; master.connect(ctx.destination);
+  music=ctx.createGain(); music.gain.value=0; music.connect(master);
+  fx=ctx.createGain(); fx.gain.value=.9; fx.connect(master);
+  const len=Math.floor(ctx.sampleRate*3.2), buf=ctx.createBuffer(2,len,ctx.sampleRate);
+  for(let c=0;c<2;c++){const d=buf.getChannelData(c);for(let i=0;i<len;i++)d[i]=(Math.random()*2-1)*Math.pow(1-i/len,2.6)}
+  verb=ctx.createConvolver(); verb.buffer=buf; wet=ctx.createGain(); wet.gain.value=.5; verb.connect(wet); wet.connect(master);
+  return true;
+ }
+ const CH=[[45,57,60,64],[41,57,60,64],[48,55,59,62],[43,55,59,62]], PENT=[69,72,74,76,79,81,84];
+ let ci=0;
+ function pad(notes,dur){
+  const t=ctx.currentTime,g=ctx.createGain(),f=ctx.createBiquadFilter(); f.type='lowpass'; f.frequency.value=700; f.Q.value=.6;
+  const lfo=ctx.createOscillator(),lg=ctx.createGain(); lfo.frequency.value=.06+Math.random()*.05; lg.gain.value=260; lfo.connect(lg); lg.connect(f.frequency); lfo.start(t); lfo.stop(t+dur+4.5);
+  g.gain.setValueAtTime(0,t); g.gain.linearRampToValueAtTime(.16,t+dur*.35); g.gain.setValueAtTime(.16,t+dur*.6); g.gain.linearRampToValueAtTime(0,t+dur+4);
+  f.connect(g); g.connect(music); const sd=ctx.createGain(); sd.gain.value=.3; g.connect(sd); sd.connect(verb);
+  notes.forEach((n,i)=>['triangle','sawtooth'].forEach((type,k)=>{const o=ctx.createOscillator(),og=ctx.createGain(); o.type=type; o.frequency.value=mf(n); o.detune.value=(k?7:-6)+i*1.5; og.gain.value=k?.05:.12; o.connect(og); og.connect(f); o.start(t); o.stop(t+dur+4.5);}));
+ }
+ function loopPad(){ if(!musicOn) return; pad(CH[ci++%CH.length],14); timers.push(setTimeout(loopPad,12000)); }
+ function bell(){ if(!musicOn) return; const t=ctx.currentTime,n=PENT[Math.floor(Math.random()*PENT.length)],o=ctx.createOscillator(),o2=ctx.createOscillator(),g=ctx.createGain(); o.type='sine';o2.type='triangle'; o.frequency.value=mf(n);o2.frequency.value=mf(n)*2.01;
+  const g2=ctx.createGain(); g2.gain.value=.18; g.gain.setValueAtTime(0,t); g.gain.linearRampToValueAtTime(.05,t+.03); g.gain.exponentialRampToValueAtTime(.0001,t+3.6); o.connect(g); o2.connect(g2); g2.connect(g); g.connect(music); const s=ctx.createGain(); s.gain.value=.7; g.connect(s); s.connect(verb); o.start(t);o2.start(t);o.stop(t+3.8);o2.stop(t+3.8);
+  timers.push(setTimeout(bell,2600+Math.random()*4400)); }
+ function pulse(){ if(!musicOn) return; const t=ctx.currentTime,o=ctx.createOscillator(),g=ctx.createGain(); o.type='sine'; o.frequency.value=55; g.gain.setValueAtTime(0,t); g.gain.linearRampToValueAtTime(.12,t+.5); g.gain.linearRampToValueAtTime(0,t+2.2); o.connect(g); g.connect(music); o.start(t); o.stop(t+2.3); timers.push(setTimeout(pulse,4000)); }
+ function setMusic(on){
+  if(on){ if(!init()) return false; ctx.resume&&ctx.resume(); if(!musicOn){ musicOn=true; const t=ctx.currentTime; music.gain.cancelScheduledValues(t); music.gain.setValueAtTime(music.gain.value,t); music.gain.linearRampToValueAtTime(.55,t+3); loopPad(); bell(); pulse(); } }
+  else if(ctx&&musicOn){ musicOn=false; timers.forEach(clearTimeout); timers=[]; const t=ctx.currentTime; music.gain.cancelScheduledValues(t); music.gain.setValueAtTime(music.gain.value,t); music.gain.linearRampToValueAtTime(0,t+1.5); }
+  cb(); return true;
+ }
+ const env=(g,t,a,d,pk)=>{g.gain.setValueAtTime(.0001,t); g.gain.exponentialRampToValueAtTime(pk,t+a); g.gain.exponentialRampToValueAtTime(.0001,t+a+d);};
+ function tone(f1,f2,dur,type='sine',pk=.12,delay=0,send=0){ const t=ctx.currentTime+delay,o=ctx.createOscillator(),g=ctx.createGain(); o.type=type; o.frequency.setValueAtTime(f1,t); if(f2) o.frequency.exponentialRampToValueAtTime(f2,t+dur); env(g,t,.008,dur,pk); o.connect(g); g.connect(bus); if(send){const s=ctx.createGain(); s.gain.value=send; g.connect(s); s.connect(verb);} o.start(t); o.stop(t+dur+.06); }
+ function noise(dur,f1,f2,pk,delay=0){ const t=ctx.currentTime+delay,b=ctx.createBuffer(1,Math.floor(ctx.sampleRate*dur),ctx.sampleRate),d=b.getChannelData(0); for(let i=0;i<d.length;i++)d[i]=Math.random()*2-1; const s=ctx.createBufferSource(); s.buffer=b; const bp=ctx.createBiquadFilter(); bp.type='bandpass'; bp.Q.value=.9; bp.frequency.setValueAtTime(f1,t); bp.frequency.exponentialRampToValueAtTime(f2,t+dur); const g=ctx.createGain(); env(g,t,dur*.35,dur*.65,pk); s.connect(bp); bp.connect(g); g.connect(bus); s.start(t); }
+ const FX={
+  startup:()=>{tone(523,0,1.4,'sine',.07,0,.6);tone(659,0,1.4,'sine',.06,.18,.6);tone(784,0,1.8,'sine',.06,.36,.7);tone(1047,0,2,'sine',.035,.54,.8)},
+  click:()=>tone(1500,1000,.05,'sine',.05),
+  marker:()=>{tone(660,880,.13,'sine',.08,0,.2)},
+  country:()=>{noise(.3,300,900,.05);tone(330,600,.28,'triangle',.04)},
+  zoom:()=>noise(.4,500,2200,.035),
+  layer:()=>{tone(520,0,.07,'square',.025);tone(780,0,.09,'square',.025,.07)},
+  search:()=>{tone(740,0,.1,'sine',.06,0,.3);tone(988,0,.16,'sine',.06,.09,.3)},
+  alert:()=>{tone(880,0,.28,'sine',.07,0,.4);tone(660,0,.3,'sine',.07,.22,.4);tone(880,0,.4,'sine',.06,.46,.5)},
+  advisory:()=>{tone(988,0,1,'sine',.07,0,.7);tone(1319,0,1.1,'sine',.05,.02,.7);tone(740,0,1.2,'triangle',.03,.02,.7)},
+  refresh:()=>{tone(784,1047,.12,'sine',.06,0,.2)},
+  error:()=>{tone(240,170,.4,'sine',.09)},
+  panel:()=>{noise(.2,400,1200,.03);tone(400,540,.18,'sine',.04)}
+ };
+ function sfx(name){
+  if(!st.sfx||st.muted||!FX[name]) return; if(!init()||ctx.state==='closed') return; if(ctx.state==='suspended') ctx.resume();
+  const n=performance.now(); if(name==='zoom'){ if(n-lastZoom<800) return; lastZoom=n; } else if(n-last<70) return; last=n;
+  if(bus){const o=bus,t=ctx.currentTime; o.gain.cancelScheduledValues(t); o.gain.setValueAtTime(o.gain.value,t); o.gain.linearRampToValueAtTime(0,t+.05);} // prevents overlapping effects
+  bus=ctx.createGain(); bus.gain.value=1; bus.connect(fx);
+  try{FX[name]()}catch{}
+ }
+ return {st,sfx,setMusic,get music(){return musicOn},onChange(f){cb=f},
+  unlock(){ if(!init()) return; if(ctx.state==='suspended') ctx.resume(); if(!unlocked){unlocked=true; sfx('startup');} },
+  setVol(v){st.vol=v; save(); if(master) master.gain.setTargetAtTime(st.muted?0:v,ctx.currentTime,.05); cb();},
+  setSfx(b){st.sfx=b;save();cb();}, setMute(b){st.muted=b;save(); if(master) master.gain.setTargetAtTime(b?0:st.vol,ctx.currentTime,.05); cb();},
+  duck(hidden){ if(!ctx||!musicOn) return; const t=ctx.currentTime; music.gain.cancelScheduledValues(t); music.gain.setValueAtTime(music.gain.value,t); music.gain.linearRampToValueAtTime(hidden?0:.55,t+1.2); }};
+})();
+const sfx=n=>Snd.sfx(n);
+
+/* =====================================================================
+   7. UI HELPERS (toast, charts, selects)
+   ===================================================================== */
+function toast(msg,type='',ms=4200){ const d=document.createElement('div'); d.className='toast '+type; d.textContent=msg; $('#toasts').appendChild(d); setTimeout(()=>d.remove(),ms); }
+const CH={};
+function chartTheme(){ if(!window.Chart) return; const cs=getComputedStyle(document.documentElement); Chart.defaults.color=cs.getPropertyValue('--mut').trim()||'#8da2bd'; Chart.defaults.borderColor='rgba(128,160,200,.16)'; Chart.defaults.font.family='Inter, system-ui, sans-serif'; Chart.defaults.maintainAspectRatio=false; }
+function mkChart(id,cfg){ if(CH[id]){CH[id].destroy();delete CH[id]} const cv=document.getElementById(id); if(!cv) return null; if(!window.Chart){cv.parentElement.innerHTML='<div class="unav">Chart library unavailable (CDN blocked). Data is shown in text elsewhere on the page.</div>';return null} chartTheme(); CH[id]=new Chart(cv,cfg); return CH[id]; }
+function locSelect(){ const by={}; S.cities.forEach(c=>(by[c.country]=by[c.country]||[]).push(c)); return `<select class="locsel" aria-label="Select location">${Object.keys(by).sort().map(k=>`<optgroup label="${esc(k)}">${by[k].map(c=>`<option value="${c.id}" ${c.id===S.sel?'selected':''}>${esc(c.name)}</option>`).join('')}</optgroup>`).join('')}</select>`; }
+const stdSeg=()=>`<div class="seg" role="group" aria-label="AQI methodology">${Object.keys(STD).map(k=>`<button data-std="${k}" aria-pressed="${S.std===k}" title="${esc(STD[k].name)}">${k==='IN'?'India NAQI':k==='US'?'US AQI':'EU EAQI'}</button>`).join('')}</div>`;
+function gauge(v,std,size=130){ const cat=catOf(std,v),R=52,C=2*Math.PI*R,fr=v==null?0:clamp(v/STD[std].max,0,1); return `<div class="gauge" style="--c:${cat.color};width:${size}px;height:${size}px" role="img" aria-label="${std} AQI ${v==null?'unavailable':Math.round(v)} ${cat.label}"><svg viewBox="0 0 120 120"><circle class="trk" cx="60" cy="60" r="${R}"/><circle class="val" cx="60" cy="60" r="${R}" stroke-dasharray="${C}" stroke-dashoffset="${C}" data-off="${C*(1-fr)}"/></svg><div class="gv"><b>${v==null?'—':Math.round(v)}</b><small>${std} AQI</small></div></div>`; }
+function animate(root=document){ requestAnimationFrame(()=>requestAnimationFrame(()=>$$('.gauge .val',root).forEach(c=>c.style.strokeDashoffset=c.dataset.off))); $$('.bar>span[data-w]',root).forEach(b=>requestAnimationFrame(()=>b.style.width=b.dataset.w)); }
+const unavail=(m)=>`<div class="unav">${m}</div>`;
+const NOISE_MSG='Verified sound monitoring data is currently unavailable for this location.';
+const provLine=(rec)=>rec?`Source: Open-Meteo Air Quality API (Copernicus CAMS) ${badge('mod')} · hourly model analysis · fetched ${new Date(rec.fetched).toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})} · model hour ${fmtTime(rec.ts[rec.nowIdx])}`:'';
+function pageHead(title,desc,extra=''){ return `<div class="ph"><div><h1>${title}</h1><p>${desc}</p></div><div class="loc">${extra||('Location '+locSelect())}</div></div>`; }
+const skel=n=>`<div class="grid g3">${Array.from({length:n},()=>'<div class="skeleton" style="height:120px"></div>').join('')}</div>`;
+
+/* =====================================================================
+   8. ENVIRONMENTAL TRAVEL ADVISORY + POLLUTION ANALYSIS
+   ===================================================================== */
+const ENV_LABEL=['Favourable conditions','Generally acceptable','Caution for sensitive travellers','Reconsider strenuous outdoor activity','Avoid prolonged outdoor activity','Avoid outdoor exposure'];
+function heatLevel(app){ if(app==null) return 0; return app>=51?5:app>=45?4:app>=39?3:app>=33?2:app>=27?1:0; }
+function envAdvisory(c){
+ const rec=S.data[c.id]; if(!rec) return null; const d=S.detail[c.id]; const i=rec.nowIdx;
+ let maxAq=rec.cur.us_aqi; for(let k=i;k<Math.min(rec.ts.length,i+25);k++){const v=rec.h.us_aqi[k]; if(v!=null&&(maxAq==null||v>maxAq)) maxAq=v;}
+ let maxApp=rec.wx?rec.wx.app:null; if(d&&d.ts){const now=Date.now()/1000; d.ts.forEach((t,k)=>{ if(t>=now&&t<=now+86400&&d.app[k]!=null) maxApp=Math.max(maxApp==null?-99:maxApp,d.app[k]); });}
+ const aqL=catOf('US',maxAq).level, hL=heatLevel(maxApp), level=Math.max(aqL<0?0:aqL,hL);
+ return {level,label:ENV_LABEL[level],maxAq,maxApp,aqL,hL,nowAq:rec.cur.us_aqi};
+}
+function bestWindows(c){
+ const rec=S.data[c.id],d=S.detail[c.id]; if(!rec||!d||!d.ts) return null; const now=Date.now()/1000, off=d.off, rows=[];
+ for(let k=0;k<d.ts.length;k++){ const t=d.ts[k]; if(t<now||t>now+86400) continue; const lh=new Date((t+off)*1000).getUTCHours(); if(lh<7||lh>19) continue; const ri=Math.round((t-rec.ts[0])/3600); const aq=rec.h.us_aqi[ri]; const app=d.app[k]; if(aq==null||app==null) continue; rows.push({t,lh,score:aq/50+Math.max(0,(app-27)/4)+(d.pp&&d.pp[k]>60?1.5:0),aq,app}); }
+ let best=null; for(let k=0;k+2<rows.length;k++){ if(rows[k+2].t-rows[k].t!==7200) continue; const s=(rows[k].score+rows[k+1].score+rows[k+2].score)/3; if(!best||s<best.s) best={s,from:rows[k],to:rows[k+2]}; }
+ const lt=t=>new Date((t+off)*1000).toISOString().slice(11,16);
+ return best?{text:`${lt(best.from.t)}–${lt(best.to.t+3600)} local (${d.tz})`,aq:Math.round((best.from.aq+best.to.aq)/2),app:Math.round((best.from.app+best.to.app)/2)}:null;
+}
+const SEAS=[{t:'Post-monsoon crop-residue burning is widely documented across north-west India and Pakistan in October–November.',f:(la,lo,m)=>la>=26&&la<=33&&lo>=70&&lo<=79&&(m===10||m===11),k:'Agricultural burning'},
+ {t:'Mainland South-East Asia has a documented biomass-burning season from roughly February to April.',f:(la,lo,m)=>la>=10&&la<=23&&lo>=97&&lo<=108&&m>=2&&m<=4,k:'Agricultural burning'},
+ {t:'The Amazon / central Brazil fire season peaks around August–October.',f:(la,lo,m)=>la>=-25&&la<=0&&lo>=-70&&lo<=-40&&m>=8&&m<=10,k:'Wildfires'},
+ {t:'West Africa experiences Harmattan dust and dry-season burning from December to March.',f:(la,lo,m)=>la>=4&&la<=16&&lo>=-18&&lo<=15&&(m===12||m<=3),k:'Natural dust storms'}];
+function gatherInput(scope){
+ const c=cur(); let list=scope==='city'?[c]:scope==='region'?S.cities.filter(x=>x.cc===c.cc&&x.state===c.state):S.cities.filter(x=>x.cc===c.cc);
+ list=list.filter(x=>S.data[x.id]); if(!list.length) return null;
+ const avg=f=>{const v=list.map(f).filter(x=>x!=null); return v.length?v.reduce((a,b)=>a+b,0)/v.length:null};
+ const p={pm25:avg(x=>S.data[x.id].cur.pm2_5),pm10:avg(x=>S.data[x.id].cur.pm10),no2:avg(x=>S.data[x.id].cur.nitrogen_dioxide),so2:avg(x=>S.data[x.id].cur.sulphur_dioxide),co:avg(x=>S.data[x.id].cur.carbon_monoxide),o3:avg(x=>S.data[x.id].cur.ozone),dust:avg(x=>S.data[x.id].cur.dust),aod:avg(x=>S.data[x.id].cur.aerosol_optical_depth)};
+ const w={wind:avg(x=>S.data[x.id].wx&&S.data[x.id].wx.wind),temp:avg(x=>S.data[x.id].wx&&S.data[x.id].wx.temp),dir:S.data[list[0].id].wx?S.data[list[0].id].wx.dir:null,isDay:S.data[list[0].id].wx?S.data[list[0].id].wx.isDay:null};
+ const blh=scope==='city'?dNow(S.detail[c.id],'blh'):null;
+ return {c,list,p,w,blh,scope,month:new Date().getMonth()+1,fire:scope==='city'?S.fires[c.id]:null};
+}
+function analyse(I){
+ const {p,w,blh,c,scope,month}=I, out=[], f=(v,d=0)=>fmt(v,d);
+ const mk=(name,kind,status,conf,ev,why,nature,weather)=>out.push({name,kind,status,conf,ev,why,nature,weather});
+ const rat=(v,who)=>v==null?null:(v/who);
+ const wxs=`Wind ${f(w.wind)} km/h from ${compass(w.dir)}, ${f(w.temp)} °C${blh!=null?`, boundary layer ${f(blh)} m`:''}`;
+ // Traffic
+ if(p.no2!=null&&p.no2>=25) mk('Vehicle emissions','Data-derived inference','possible',p.no2>=50?'Medium':'Low',[`NO₂ ${f(p.no2)} µg/m³ = ${f(rat(p.no2,25),1)}× WHO 24-h guideline (modelled)`,p.co!=null&&p.co>=500?`CO ${f(p.co/1000,2)} mg/m³ also elevated (modelled)`:null].filter(Boolean),'NO₂ is a combustion tracer strongly linked to road traffic, but power plants and industry also emit it, so this cannot prove traffic is the cause.','Continuous, with rush-hour peaks',wxs+' — low wind and low boundary layer raise concentrations.');
+ else mk('Vehicle emissions','Data-derived inference','none','None',['NO₂ at or below the WHO 24-h guideline in the modelled data'],'No NO₂ signal suggesting a strong combustion plume at this time.','—',wxs);
+ // Industry
+ if(p.so2!=null&&(p.so2>=40||(p.no2>=50&&p.so2>=10))) mk('Industrial emissions','Data-derived inference','possible',p.so2>=40?'Medium':'Low',[`SO₂ ${f(p.so2)} µg/m³ (WHO 24-h guideline 40) and NO₂ ${f(p.no2)} µg/m³ (modelled)`],'SO₂ mainly comes from burning sulphur-bearing fuels (coal, oil, some industrial processes, shipping). No facility-level inventory is used.','Continuous',wxs);
+ else mk('Industrial emissions','Data-derived inference','none','None',['SO₂ not elevated in the modelled data'],'No SO₂/NO₂ pattern indicating a strong industrial plume.','—',wxs);
+ if(p.so2!=null&&p.so2>=40&&p.no2>=25) mk('Power plants','Data-derived inference','possible','Low',[`Co-elevated SO₂ ${f(p.so2)} and NO₂ ${f(p.no2)} µg/m³`],'Coal-fired power is a major SO₂/NO₂ source in many regions, but no plant emission or satellite-plume data is used here.','Continuous',wxs);
+ else mk('Power plants','Data-derived inference','none','None',['No co-elevated SO₂/NO₂ signal'],'No supporting evidence in the available data.','—','—');
+ // Coarse dust
+ const ratio=p.pm10?p.pm25/p.pm10:null, coarse=p.pm10!=null&&p.pm10>=45&&ratio!=null&&ratio<.5&&(p.dust==null||p.dust<50);
+ const cev=[`PM10 ${f(p.pm10)} µg/m³, PM2.5/PM10 ratio ${f(ratio,2)} → coarse-particle dominated (modelled)`];
+ mk('Construction dust','Data-derived inference',coarse?'possible':'none',coarse?'Low':'None',coarse?cev:['No coarse-particle excess'],'Coarse PM is typical of mechanical dust (construction, demolition) but cannot be separated from road or natural dust using concentrations alone.','Continuous / episodic','Dry, windy weather increases dust.');
+ mk('Road dust','Data-derived inference',coarse?'possible':'none',coarse?'Low':'None',coarse?cev:['No coarse-particle excess'],'Resuspension of road dust shows up as coarse PM; the same tracer is shared with construction and natural dust.','Continuous','Dry roads and traffic increase resuspension.');
+ // Natural dust
+ if(p.dust!=null&&p.dust>=20) mk('Natural dust storms','Data-derived inference','possible',p.dust>=50?'Medium':'Low',[`Modelled mineral dust ${f(p.dust)} µg/m³ (CAMS dust field)`],'The CAMS model simulates desert dust transport; elevated values indicate dust in the airmass.','Seasonal / episodic',wxs);
+ else mk('Natural dust storms','Data-derived inference','none','None',[`Modelled dust ${f(p.dust,1)} µg/m³ — low`],'No dust-storm signal in the model.','—','—');
+ // Fires
+ const ctx=SEAS.filter(s=>s.f(c.lat,c.lon,month));
+ const fire=I.fire;
+ const fireEv=fire&&!fire.err?(fire.n>0?[`${fire.n} VIIRS active-fire detections within ~50 km in the last 24 h (nearest ≈ ${f(fire.near)} km) — NASA FIRMS`]:['0 VIIRS active-fire detections within ~50 km in the last 24 h — NASA FIRMS']):null;
+ const ctxFor=k=>ctx.filter(s=>s.k===k).map(s=>s.t+' (general context — not verified for today)');
+ [['Agricultural burning','Agricultural burning'],['Wildfires','Wildfires']].forEach(([nm,k])=>{
+  if(scope!=='city') return mk(nm,'Not assessed','na','—',['Fire detections are only evaluated at city scope'],'Switch scope to City.','Seasonal','—');
+  if(fireEv){ const has=fire.n>0; mk(nm,has?'Data-derived inference':'Data-derived inference',has?'possible':'none',has?'Medium':'None',fireEv.concat(ctxFor(k)),has?'Fire detections show combustion nearby; detections alone do not quantify smoke reaching the city, and cannot tell crop fires from wildfires.':'No fires detected nearby in the last 24 h.','Seasonal',wxs); }
+  else mk(nm,ctxFor(k).length?'Contextual hypothesis':'Not assessed','na',ctxFor(k).length?'Low':'—',ctxFor(k).length?ctxFor(k).concat(['No fire-detection data loaded (add a NASA FIRMS key on Data Sources to test this)']):['No fire-detection data loaded (add a NASA FIRMS key on Data Sources to test this)'],'Cannot be confirmed or excluded without satellite fire detections.','Seasonal',wxs);
+ });
+ mk('Waste burning','Not assessed','na','—',['No public API in this build resolves small open-burning events'],'Waste burning is common in some cities but is not detectable from concentration data alone.','Continuous','—');
+ if(p.pm25!=null&&p.pm25>=35&&w.temp!=null&&w.temp<15&&p.co!=null&&p.co>=400) mk('Household fuel combustion','Data-derived inference','possible','Low',[`PM2.5 ${f(p.pm25)} µg/m³, CO ${f(p.co/1000,2)} mg/m³ and cool temperature ${f(w.temp)} °C (modelled)`],'Cold-weather heating/cooking with solid fuels raises PM2.5 and CO together; this pattern is only suggestive.','Seasonal (cold months)',wxs);
+ else mk('Household fuel combustion','Data-derived inference','none','None',['No co-elevated PM2.5 + CO pattern in cool conditions'],'No supporting evidence in the available data.','—','—');
+ if(scope==='city'&&PORTS.has(c.id)&&p.so2!=null&&p.so2>=10) mk('Port & shipping emissions','Contextual hypothesis','possible','Low',[`${c.name} hosts a major port (background knowledge) and SO₂ is ${f(p.so2)} µg/m³ (modelled)`],'Ships burn sulphur-bearing fuel; harbour cities can see SO₂/NO₂ signatures, but no vessel-tracking data is used.','Continuous',wxs);
+ else mk('Port & shipping emissions','Not assessed','na','—',[scope==='city'&&PORTS.has(c.id)?'Port city, but SO₂ is not elevated':'Not flagged as a major port in this app'],'No vessel or port-activity data is used.','Continuous','—');
+ // Meteorology
+ if(blh!=null&&blh<400&&p.pm25!=null&&p.pm25>=15) mk('Temperature inversion','Data-derived inference','possible',blh<200?'Medium':'Low',[`Modelled boundary-layer height ${f(blh)} m with PM2.5 ${f(p.pm25)} µg/m³`],'A shallow mixing layer traps emissions near the ground. This explains accumulation, not the original source.','Seasonal / nocturnal',wxs);
+ else mk('Temperature inversion',scope==='city'?'Data-derived inference':'Not assessed',scope==='city'?'none':'na','None',[scope==='city'?`Boundary-layer height ${f(blh)} m — no shallow-layer signal`:'Evaluated at city scope only'],'Meteorological factor, not a source.','—',wxs);
+ if(w.wind!=null&&w.wind<12&&p.pm25!=null&&p.pm25>=15) mk('Low wind speed (stagnation)','Data-derived inference','possible',w.wind<8?'Medium':'Low',[`Wind ${f(w.wind)} km/h with PM2.5 ${f(p.pm25)} µg/m³`],'Weak winds reduce dispersion so local emissions build up.','Episodic',wxs);
+ else mk('Low wind speed (stagnation)','Data-derived inference','none','None',[`Wind ${f(w.wind)} km/h — not stagnant or PM2.5 not elevated`],'Not a limiting factor right now.','—',wxs);
+ if(w.wind!=null&&w.wind>=20&&p.pm25!=null&&p.pm25>=25) mk('Regional pollution transport','Data-derived inference','possible','Low',[`PM2.5 ${f(p.pm25)} µg/m³ despite winds of ${f(w.wind)} km/h from ${compass(w.dir)}`],'Elevated PM despite good ventilation can indicate pollution carried in from upwind regions. Upwind sources are not identified here.','Episodic',wxs);
+ else mk('Regional pollution transport','Data-derived inference','none','None',['No high-wind-with-high-PM signature'],'No supporting evidence in the available data.','—',wxs);
+ if(p.o3!=null&&p.o3>=100&&w.temp!=null&&w.temp>=25) mk('Secondary ozone formation','Data-derived inference','possible',w.isDay?'Medium':'Low',[`O₃ ${f(p.o3)} µg/m³ (WHO 8-h guideline 100) at ${f(w.temp)} °C`],'Ozone forms from NOx and VOCs in strong sunlight and heat; it is a secondary pollutant, not directly emitted.','Seasonal (warm months), afternoon peaks',wxs);
+ else mk('Secondary ozone formation','Data-derived inference','none','None',['No ozone + heat signature'],'No supporting evidence in the available data.','—',wxs);
+ const rank={Medium:0,Low:1,None:2,'—':3}; out.sort((a,b)=>(a.status==='possible'?0:1)-(b.status==='possible'?0:1)||rank[a.conf]-rank[b.conf]);
+ return out;
+}
+
+/* =====================================================================
+   9. MAP MODULE
+   ===================================================================== */
+const MapMod={map:null,mk:{},tileErr:0,fallback:false,ready:false,
+ init(){
+  if(this.map) return;
+  if(!window.maplibregl){ $('#mapFail').hidden=false; return; }
+  const dark=S.theme==='dark', sd=['a','b','c','d'], T=s=>sd.map(x=>`https://${x}.basemaps.cartocdn.com/${s}/{z}/{x}/{y}.png`), at='© OpenStreetMap contributors © CARTO';
+  const style={version:8,sources:{cdark:{type:'raster',tiles:T('dark_all'),tileSize:256,maxzoom:19,attribution:at},clight:{type:'raster',tiles:T('light_all'),tileSize:256,maxzoom:19,attribution:at},osm:{type:'raster',tiles:['https://tile.openstreetmap.org/{z}/{x}/{y}.png'],tileSize:256,maxzoom:19,attribution:'© OpenStreetMap contributors'}},
+   layers:[{id:'bg',type:'background',paint:{'background-color':dark?'#060b14':'#dce6f1'}},{id:'cdark',type:'raster',source:'cdark',layout:{visibility:dark?'visible':'none'}},{id:'clight',type:'raster',source:'clight',layout:{visibility:dark?'none':'visible'}},{id:'osm',type:'raster',source:'osm',layout:{visibility:'none'}}]};
+  let map; try{ map=this.map=new maplibregl.Map({container:'map',style,center:[15,24],zoom:innerWidth<760?.9:1.7,minZoom:.6,maxPitch:60,attributionControl:false}); }catch(e){ $('#mapFail').hidden=false; return; }
+  map.addControl(new maplibregl.AttributionControl({compact:true}));
+  map.addControl(new maplibregl.NavigationControl({visualizePitch:true}),'top-right');
+  map.on('error',e=>{ if(e&&e.sourceId&&/^c(dark|light)$/.test(e.sourceId)&&!this.fallback&&++this.tileErr>=6){ this.fallback=true; ['cdark','clight'].forEach(l=>map.setLayoutProperty(l,'visibility','none')); map.setLayoutProperty('osm','visibility','visible'); toast('Switched to the OpenStreetMap basemap.','warn'); } });
+  map.on('load',()=>{ this.ready=true; this.loadCountries(); this.build(); this.update(); this.zoomClass(); });
+  map.on('zoom',()=>this.zoomClass());
+  map.on('zoomend',e=>{ if(e&&e.originalEvent) sfx('zoom'); });
+  map.on('click',e=>this.onClick(e));
+ },
+ zoomClass(){ if(!this.map) return; const z=this.map.getZoom(),el=this.map.getContainer(); el.classList.toggle('z-lo',z<3); el.classList.toggle('z-hi',z>=4.6); },
+ async loadCountries(){
+  try{
+   const g=await Net.json(CFG.COUNTRIES,{ttl:864e5,src:'geo-countries'});
+   g.features.forEach(f=>{const p=f.properties; const iso=p.ISO_A2_EH&&p.ISO_A2_EH!=='-99'?p.ISO_A2_EH:(p.ISO_A2&&p.ISO_A2!=='-99'?p.ISO_A2:'??'); p.iso=iso; p.cname=p.NAME||p.ADMIN;});
+   S.geo=g; const m=this.map; if(!m.getSource('countries')){
+    m.addSource('countries',{type:'geojson',data:g});
+    m.addLayer({id:'c-fill',type:'fill',source:'countries',paint:{'fill-color':'#35d4ff','fill-opacity':.015}});
+    m.addLayer({id:'c-hl',type:'fill',source:'countries',filter:['==',['get','iso'],''],paint:{'fill-color':'#35d4ff','fill-opacity':.2}});
+    m.addLayer({id:'c-line',type:'line',source:'countries',paint:{'line-color':'#35d4ff','line-opacity':.4,'line-width':.7}});
+    m.on('mousemove','c-fill',e=>{ const f=e.features&&e.features[0]; if(f) m.setFilter('c-hl',['==',['get','iso'],f.properties.iso]); });
+    m.on('mouseleave','c-fill',()=>m.setFilter('c-hl',['==',['get','iso'],'']));
+   }
+   this.countryFill();
+  }catch(e){ toast('Country boundaries could not be loaded; city markers still work.','warn'); }
+ },
+ countryFill(){
+  const m=this.map; if(!m||!m.getLayer('c-fill')) return;
+  if(S.layer==='adv'&&S.adv){ const ex=['match',['get','iso']]; let n=0; Object.keys(S.adv).forEach(cc=>{const a=S.adv[cc].advisory; if(a&&a.score!=null){ex.push(cc,colorOf(scaleFor('adv'),+a.score));n++}}); if(n){ex.push('rgba(0,0,0,0)'); m.setPaintProperty('c-fill','fill-color',ex); m.setPaintProperty('c-fill','fill-opacity',.5); return;} }
+  m.setPaintProperty('c-fill','fill-color','#35d4ff'); m.setPaintProperty('c-fill','fill-opacity',.015);
+ },
+ build(){ if(!this.map||!this.ready) return; S.cities.forEach(c=>{ if(this.mk[c.id]) return; const el=document.createElement('button'); el.type='button'; el.className='mk'; el.dataset.sfx='none'; el.innerHTML='<span class="mv">–</span><span class="mn"></span>'; $('.mn',el).textContent=c.name; el.setAttribute('aria-label',`${c.name}, ${c.country}. Open city details.`);
+   el.addEventListener('click',ev=>{ev.stopPropagation(); selectCity(c.id,{fly:true,open:true,sfx:'marker'});});
+   this.mk[c.id]={m:new maplibregl.Marker({element:el}).setLngLat([c.lon,c.lat]).addTo(this.map),el}; }); },
+ update(){
+  if(!this.map||!this.ready) return; this.build(); const L=S.layer, sc=scaleFor(L), t=S.tl.t;
+  S.cities.forEach(c=>{ const o=this.mk[c.id]; if(!o) return; const v=LV(c,L,t), rec=S.data[c.id];
+   let col=v==null?'#7c8aa0':colorOf(sc,v), txt='–';
+   if(v!=null){ txt=L==='co'?v.toFixed(1):L==='adv'?v.toFixed(1):L==='temp'?Math.round(v)+'°':L==='hum'?Math.round(v)+'%':Math.round(v); if(L==='wind'&&rec&&rec.wx&&rec.wx.dir!=null) txt=`<i class="arr" style="transform:rotate(${(rec.wx.dir+180)%360}deg)">↑</i>${Math.round(v)}`; }
+   $('.mv',o.el).innerHTML=txt; o.el.style.setProperty('--c',col);
+   const aq=rec?rec.cur.us_aqi:null; o.el.classList.toggle('hid',S.filter>0&&(aq==null||catOf('US',aq).level<S.filter)); o.el.classList.toggle('sel',c.id===S.sel);
+   o.el.title=`${c.name}: ${v==null?'no data':txt.toString().replace(/<[^>]+>/g,'')}`; });
+  this.legend(); this.countryFill();
+  $('#p-map').classList.toggle('panel-open',!$('#side').hidden);
+ },
+ legend(){ const sc=scaleFor(S.layer), L=S.layer; $('#legend').innerHTML=`<h4>${esc(sc.title)}</h4><div class="lg">${sc.stops.map(s=>`<span style="background:${s.color}"></span>`).join('')}</div><div class="ll">${sc.stops.map(s=>`<span>${esc(s.label)}</span>`).join('')}</div>${L==='noise'?'<small class="mut">'+NOISE_MSG+'</small>':L==='fire'&&!S.keys.firms?'<small class="mut">Add a NASA FIRMS key on Data Sources to enable.</small>':L==='adv'&&!S.adv?'<small class="mut">Advisory feed unavailable.</small>':''}${S.tl.t!=null&&!['aqi','pm2_5','pm10','no2','so2','co','o3'].includes(L)?'<small class="mut">Timeline applies to pollutant layers.</small>':''}`; },
+ fly(c,z=8){ if(this.map) this.map.flyTo({center:[c.lon,c.lat],zoom:Math.max(this.map.getZoom(),z),speed:1.2,essential:false}); },
+ async onClick(e){
+  let feat=null; try{ feat=this.map.getLayer('c-fill')?this.map.queryRenderedFeatures(e.point,{layers:['c-fill']})[0]:null; }catch{}
+  if(S.probe){ const n=S.cities.filter(c=>c.custom&&c.probe).length+1; const lat=+e.lngLat.lat.toFixed(3),lon=+(((e.lngLat.lng+540)%360)-180).toFixed(3); const cc=feat?feat.properties.iso:'??';
+   const c={id:`p${lat}_${lon}`,name:`Point ${lat.toFixed(2)}, ${lon.toFixed(2)}`,cc,country:feat?feat.properties.cname:'Open water / unknown',state:'—',lat,lon,custom:true,probe:true};
+   if(!cityById(c.id)) S.cities.push(c); refreshSelects(); selectCity(c.id,{fly:false,open:true,sfx:'marker'}); return; }
+  if(feat&&feat.properties.iso!=='??') showCountry(feat.properties.iso,feat.properties.cname,e.lngLat);
+ },
+ theme(){ if(!this.map||!this.ready||this.fallback) return; const d=S.theme==='dark'; this.map.setLayoutProperty('cdark','visibility',d?'visible':'none'); this.map.setLayoutProperty('clight','visibility',d?'none':'visible'); this.map.setPaintProperty('bg','background-color',d?'#060b14':'#dce6f1'); }
+};
+
+/* ---- map side panel ---- */
+function openSide(html){ const s=$('#side'); const was=s.hidden; s.hidden=false; $('#sideBody').innerHTML=html; icons(); animate(s); $('#p-map').classList.add('panel-open'); if(was) sfx('panel'); s.scrollTop=0; }
+function closeSide(){ $('#side').hidden=true; $('#p-map').classList.remove('panel-open'); MapMod.update(); }
+function cityPanel(c){
+ const rec=S.data[c.id]; const a=rec?aqiAt(rec,S.std,null):null, cat=catOf(S.std,a), inW=S.watch.includes(c.id);
+ const pols=rec?POL.map(p=>{const v=rec.cur[p.k]; const val=v==null?null:v*p.conv; return `<div class="pol" title="${esc(p.note)}: ${p.who*p.conv} ${p.unit}"><small>${p.label}</small><b>${fmt(val,p.d)}<i>${p.unit}</i></b></div>`}).join(''):skel(1);
+ const w=rec&&rec.wx;
+ return `<div class="sideh"><div><h2>${flag(c.cc)} ${esc(c.name)}</h2><small>${esc(c.state&&c.state!=='—'?c.state+', ':'')}${esc(c.country)} · ${c.lat.toFixed(2)}, ${c.lon.toFixed(2)}</small></div><button class="ibtn" id="sideClose" aria-label="Close panel"><i data-lucide="x"></i></button></div>
+ ${rec?`<div class="heroaq">${gauge(a,S.std,118)}<div><span class="pill" style="--c:${cat.color}">${esc(cat.label)}</span><p style="margin:.5em 0 .3em;font-size:.85rem">${HEALTH[Math.max(0,cat.level)]}</p></div></div>`:skel(1)}
+ <div style="margin:10px 0">${stdSeg()}</div><small class="mut">${esc(STD[S.std].note)}</small>
+ <h3 style="margin:14px 0 8px">Pollutants ${badge('mod')}</h3><div class="grid g3" style="grid-template-columns:repeat(3,1fr)">${pols}</div>
+ ${w?`<h3 style="margin:14px 0 8px">Atmosphere ${badge('mod')}</h3><div class="grid" style="grid-template-columns:repeat(2,1fr)"><div class="pol"><small>Temperature</small><b>${fmt(w.temp,1)}<i>°C</i></b></div><div class="pol"><small>Humidity</small><b>${fmt(w.hum)}<i>%</i></b></div><div class="pol"><small>Wind</small><b>${fmt(w.wind)}<i>km/h ${compass(w.dir)}</i></b></div><div class="pol"><small>Feels like</small><b>${fmt(w.app,1)}<i>°C</i></b></div></div>`:''}
+ <h3 style="margin:14px 0 8px">Noise</h3>${unavail(NOISE_MSG)}
+ <p class="note">${provLine(rec)}. Last updated ${rec?new Date(rec.fetched).toLocaleString():'—'}. Measurement type: modelled concentration, not a sensor reading.</p>
+ <div class="chips"><a class="btn sm" href="#/air" data-sfx="none">Air profile</a><a class="btn sm" href="#/analysis">Causes</a><a class="btn sm" href="#/travel">Travel</a><button class="btn sm" id="pWatch" aria-pressed="${inW}">${inW?'Monitoring ✓':'Monitor'}</button><button class="btn sm" id="pCmp">+ Compare</button></div>`;
+}
+function renderCityPanel(c){ openSide(cityPanel(c)); $('#sideClose').onclick=()=>closeSide(); $('#pWatch').onclick=()=>toggleWatch(c.id); $('#pCmp').onclick=()=>addCompare(c.id); }
+function showCountry(cc,name,ll){
+ S.country=cc; sfx('country'); if(MapMod.map&&ll) MapMod.map.easeTo({center:ll,zoom:Math.max(MapMod.map.getZoom(),3.4)});
+ const list=S.cities.filter(c=>c.cc===cc), a=advOf(cc);
+ openSide(`<div class="sideh"><div><h2>${flag(cc)} ${esc(name)}</h2><small>Country profile · ${list.length} monitored ${list.length===1?'city':'cities'} in this build</small></div><button class="ibtn" id="sideClose" aria-label="Close panel"><i data-lucide="x"></i></button></div>
+ ${list.length?`<h3 style="margin:10px 0 6px">Monitored cities</h3>${list.map(c=>{const r=S.data[c.id],v=r?aqiAt(r,S.std,null):null,ct=catOf(S.std,v);return `<button class="rk" data-city="${c.id}" data-sfx="none"><span class="nm">${esc(c.name)}</span><span class="pill" style="--c:${ct.color}">${fmt(v)} ${esc(ct.label.slice(0,14))}</span></button>`}).join('')}<small class="mut">${esc(STD[S.std].name)} · modelled</small>`:unavail('No city of this country is in the monitored set. Search for a city in the header to add one, or use “Probe any point”.')}
+ <h3 style="margin:14px 0 6px">Government advisory composite</h3>${a?`<p><span class="pill" style="--c:${colorOf(scaleFor('adv'),+a.score)}">Score ${(+a.score).toFixed(1)} / 5</span></p><small class="mut">${esc(a.message||'')} · updated ${esc(a.updated||'n/a')}</small>`:unavail('Advisory feed unavailable. See official sources on the Travel page.')}
+ <h3 style="margin:14px 0 6px">Emergency</h3><p>${esc(EMERG[cc]||'Dial 112 where supported; verify locally.')}</p>
+ <div class="chips"><button class="btn sm" id="goCountry">Full country profile</button></div>`);
+ $('#sideClose').onclick=closeSide; $('#goCountry').onclick=()=>{S.country=cc;location.hash='#/country'};
+ $$('#sideBody [data-city]').forEach(b=>b.onclick=()=>selectCity(b.dataset.city,{fly:true,open:true,sfx:'marker'}));
+}
+
+/* ---- timeline ---- */
+function initTimeline(){
+ const r=$('#tlRange'); if(!S.tlTs){ $('#tlLabel').textContent='Timeline unavailable (no data).'; r.disabled=true; return; }
+ r.max=S.tlTs.length-1; r.disabled=false; const f=Object.values(S.data)[0]; r.value=f?f.nowIdx:0; tlLabel();
+}
+function tlLabel(){ const r=$('#tlRange'); if(!S.tlTs) return; const t=S.tlTs[+r.value], now=Date.now()/1000; $('#tlLabel').innerHTML=`${fmtTime(t)} — ${t<=now?'Past (model analysis)':'Forecast (model)'} ${t<=now?badge('mod'):badge('fc')}`; }
+function tlSet(i,fromUser){ if(!S.tlTs) return; const r=$('#tlRange'); r.value=i; const f=Object.values(S.data)[0]; S.tl.t=(f&&+i===f.nowIdx)?null:S.tlTs[+i]; tlLabel(); MapMod.update(); }
+function tlPlay(on){ S.tl.playing=on; $('#tlPlay').innerHTML=`<i data-lucide="${on?'pause':'play'}"></i>`; icons(); clearInterval(S.tl.timer); if(on){ S.tl.timer=setInterval(()=>{ const r=$('#tlRange'); let i=+r.value+1; if(i>+r.max) i=0; tlSet(i); },380); } }
+
+/* =====================================================================
+   10. PAGE RENDERERS
+   ===================================================================== */
+function ranking(kind){
+ const L=S.cities.filter(c=>S.data[c.id]);
+ const aq=c=>aqiAt(S.data[c.id],S.std,null), pm=c=>S.data[c.id].cur.pm2_5;
+ const ch=c=>{const r=S.data[c.id],i=r.nowIdx; if(i<47) return null; const a=runAvg(r.h.pm2_5,i,24),b=runAvg(r.h.pm2_5,i-24,24); return a==null||b==null||b<5?null:(a-b)/b*100;};
+ const T={cleanest:['Cleanest cities',()=>L.map(c=>[c,aq(c)]).filter(x=>x[1]!=null).sort((a,b)=>a[1]-b[1]),v=>Math.round(v)+' AQI'],
+  polluted:['Most polluted cities',()=>L.map(c=>[c,aq(c)]).filter(x=>x[1]!=null).sort((a,b)=>b[1]-a[1]),v=>Math.round(v)+' AQI'],
+  lowpm:['Lowest PM2.5',()=>L.map(c=>[c,pm(c)]).filter(x=>x[1]!=null).sort((a,b)=>a[1]-b[1]),v=>v.toFixed(1)+' µg/m³'],
+  highpm:['Highest PM2.5',()=>L.map(c=>[c,pm(c)]).filter(x=>x[1]!=null).sort((a,b)=>b[1]-a[1]),v=>v.toFixed(1)+' µg/m³'],
+  improved:['Most improved (24 h PM2.5)',()=>L.map(c=>[c,ch(c)]).filter(x=>x[1]!=null).sort((a,b)=>a[1]-b[1]),v=>(v>0?'+':'')+v.toFixed(0)+'%'],
+  worse:['Deteriorating (24 h PM2.5)',()=>L.map(c=>[c,ch(c)]).filter(x=>x[1]!=null).sort((a,b)=>b[1]-a[1]),v=>(v>0?'+':'')+v.toFixed(0)+'%'],
+  quiet:['Quietest cities',null],noisy:['Noisiest cities',null]};
+ return T[kind];
+}
+function renderOverview(){
+ const L=S.cities.filter(c=>S.data[c.id]), us=c=>S.data[c.id].cur.us_aqi;
+ const good=L.filter(c=>us(c)!=null&&us(c)<=50).length, bad=L.filter(c=>us(c)!=null&&us(c)>100).length, ctry=new Set(S.cities.map(c=>c.cc)).size;
+ const kp=(b,s)=>`<div class="card kpi"><b>${b}</b><span>${s}</span></div>`;
+ const rk=ranking(S.rank); let rows='';
+ if(!rk[1]) rows=unavail(NOISE_MSG+' Noise rankings are shown only when verified measurements exist for comparable locations.');
+ else if(!L.length) rows=skel(1); else { const R=rk[1]().slice(0,10),mx=Math.max(...R.map(r=>Math.abs(r[1])),1); rows=R.map((r,i)=>{const ct=['cleanest','polluted'].includes(S.rank)?catOf(S.std,r[1]):{color:'var(--ac)'}; return `<button class="rk" data-city="${r[0].id}" data-sfx="none"><span class="n">${i+1}</span><span class="nm">${flag(r[0].cc)} ${esc(r[0].name)}<small class="mut"> ${esc(r[0].country)}</small><div class="bar" style="--c:${ct.color}"><span data-w="${Math.max(4,Math.abs(r[1])/mx*100)}%" style="width:0"></span></div></span><b>${rk[2](r[1])}</b></button>`}).join('')||unavail('Not enough data yet.'); }
+ const wl=S.watch.map(cityById).filter(Boolean);
+ $('#p-overview').innerHTML=`<div class="card hero"><span class="badge b-mod">Live model data</span><h1 style="margin-top:12px">Understand the air you breathe, anywhere on Earth.</h1><p>Explore air quality, atmospheric conditions, environmental risk and travel advisories for cities worldwide — with every value labelled by source, unit, timestamp and whether it is measured, modelled or forecast.</p><div class="chips" style="margin-top:14px"><a class="btn pri" href="#/map"><i data-lucide="map"></i>Explore the map</a><a class="btn" href="#/compare"><i data-lucide="columns"></i>Compare cities</a><a class="btn" href="#/travel"><i data-lucide="plane"></i>Plan a trip</a></div><small class="mut" style="display:block;margin-top:12px">${S.lastSync?'Last synchronised '+S.lastSync.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})+' · auto-refresh every 15 min':'Synchronising…'}</small></div>
+ <div class="grid g6" style="margin:16px 0">${kp(ctry,'Countries covered')}${kp(L.length||'—','Cities monitored (model grid)')}${kp('—','Monitoring stations <small>(add OpenAQ key)</small>')}${kp(L.length?good:'—','Cities with good air (US AQI ≤ 50)')}${kp(L.length?bad:'—','Unhealthy air (US AQI > 100)')}${kp('n/a','Elevated noise — no verified data')}</div>
+ <p class="note">Statistics are computed only from cities in this app's monitored set using the same model and the US AQI scale so they are comparable. “Monitoring stations” and noise statistics need verified station data and are not estimated.</p>
+ <div class="main2"><div class="card"><div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:center"><h2>City rankings</h2><div style="display:flex;gap:8px;align-items:center">${S.rank==='cleanest'||S.rank==='polluted'?stdSeg():''}<select id="rankSel" aria-label="Ranking">${['cleanest','polluted','lowpm','highpm','quiet','noisy','improved','worse'].map(k=>`<option value="${k}" ${k===S.rank?'selected':''}>${ranking(k)[0]}</option>`).join('')}</select></div></div><div id="rkList" style="margin-top:8px">${rows}</div></div>
+ <div class="grid"><div class="card"><h2>Air quality distribution</h2><div class="chartbox sm"><canvas id="chDist"></canvas></div><small class="mut">US AQI categories across monitored cities (modelled).</small></div>
+ <div class="card"><h2>Your monitored cities</h2>${wl.length?wl.map(c=>{const r=S.data[c.id],v=r?aqiAt(r,S.std,null):null,ct=catOf(S.std,v);return `<button class="rk" data-city="${c.id}" data-sfx="none"><span class="nm">${esc(c.name)}</span><span class="pill" style="--c:${ct.color}">${fmt(v)} · ${esc(ct.label)}</span></button>`}).join(''):'<p class="mut">No monitored cities yet. Open a city and press “Monitor”, or open Alerts.</p>'}</div></div></div>`;
+ icons(); animate($('#p-overview'));
+ $('#rankSel').onchange=e=>{S.rank=e.target.value;sfx('click');renderOverview()};
+ $$('#p-overview [data-city]').forEach(b=>b.onclick=()=>{selectCity(b.dataset.city,{fly:true,open:true,sfx:'marker'}); location.hash='#/map';});
+ const cnt=[0,0,0,0,0,0]; L.forEach(c=>{const v=us(c); const k=catOf('US',v).level; if(k>=0)cnt[k]++;});
+ mkChart('chDist',{type:'doughnut',data:{labels:STD.US.cats.map(c=>c[1]),datasets:[{data:cnt,backgroundColor:PAL,borderWidth:0}]},options:{cutout:'62%',plugins:{legend:{position:'right',labels:{boxWidth:10,font:{size:11}}}}}});
+}
+function pollutantCards(rec){ return POL.map(p=>{const v=rec.cur[p.k],val=v==null?null:v*p.conv,r=v==null?null:v/p.who,col=r==null?'#7c8aa0':r<=1?PAL[0]:r<=2?PAL[2]:r<=4?PAL[3]:PAL[4]; return `<div class="pol" style="--c:${col}"><small><span>${p.label}</span><span>${r==null?'':r.toFixed(1)+'× WHO'}</span></small><b>${fmt(val,p.d)}<i>${p.unit}</i></b><div class="bar"><span data-w="${r==null?0:clamp(r/3*100,2,100)}%" style="width:0"></span><em></em></div><small>${esc(p.note)}: ${p.who*p.conv} ${p.unit}</small></div>`}).join(''); }
+function renderAir(){
+ const c=cur(),rec=S.data[c.id],d=S.detail[c.id];
+ let h=pageHead('Air Quality Intelligence',`Pollutants, AQI methodologies and atmospheric context for ${esc(c.name)}.`);
+ if(!rec){ $('#p-air').innerHTML=h+skel(3); return bindLoc(); }
+ const a=aqiAt(rec,S.std,null),cat=catOf(S.std,a),ind=indiaAQI(rec,rec.nowIdx),w=rec.wx;
+ const row=(k)=>{const v=aqiAt(rec,k,null),ct=catOf(k,v);return `<tr><td>${STD[k].name}</td><td><b>${fmt(v)}</b></td><td><span class="pill" style="--c:${ct.color}">${esc(ct.label)}</span></td><td class="mut">${k==='IN'&&ind?'Dominant: '+esc(({pm2_5:'PM2.5',pm10:'PM10',nitrogen_dioxide:'NO₂',sulphur_dioxide:'SO₂',ozone:'O₃',co:'CO'})[ind.dom]):''}</td></tr>`};
+ $('#p-air').innerHTML=h+`<div class="main2"><div class="card"><div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px"><h2>${flag(c.cc)} ${esc(c.name)} <small class="mut">${esc(c.country)}</small></h2>${stdSeg()}</div>
+ <div class="heroaq" style="margin:14px 0">${gauge(a,S.std,170)}<div style="flex:1;min-width:220px"><span class="pill" style="--c:${cat.color};font-size:1rem">${esc(cat.label)}</span><p>${HEALTH[Math.max(0,cat.level)]}</p><p class="note">Health text is generic guidance adapted from US EPA categories — not personal medical advice. Methodology: <b>${esc(STD[S.std].name)}</b>. ${esc(STD[S.std].note)}</p></div></div>
+ <h3>Pollutant concentrations ${badge('mod')}</h3><div class="grid g3" style="margin-top:8px">${pollutantCards(rec)}</div>
+ <p class="note">Bars compare each pollutant with the WHO 2021 guideline (white tick = 1×). Guidelines are health-based references, <b>not</b> legal limits. ${provLine(rec)}.</p></div>
+ <div class="grid"><div class="card"><h3>AQI by methodology</h3><div class="tw"><table><thead><tr><th>Standard</th><th>AQI</th><th>Category</th><th></th></tr></thead><tbody>${['US','EU','IN'].map(row).join('')}</tbody></table></div><p class="note">The three scales are calculated independently and are not interchangeable. Values are never converted between standards.</p></div>
+ <div class="card"><h3>Atmosphere ${badge('mod')}</h3>${w?`<div class="grid g4" style="grid-template-columns:repeat(2,1fr)"><div class="pol"><small>Temperature</small><b>${fmt(w.temp,1)}<i>°C</i></b></div><div class="pol"><small>Humidity</small><b>${fmt(w.hum)}<i>%</i></b></div><div class="pol"><small>Wind speed</small><b>${fmt(w.wind)}<i>km/h</i></b></div><div class="pol"><small>Wind from</small><b>${compass(w.dir)}<i>${fmt(w.dir)}°</i></b></div><div class="pol"><small>Visibility</small><b>${d&&!d.err&&dNow(d,'vis')!=null?fmt(dNow(d,'vis')/1000,1):'—'}<i>km</i></b></div><div class="pol"><small>Feels like</small><b>${fmt(w.app,1)}<i>°C</i></b></div></div><small class="mut">Open-Meteo forecast model · ${w.time?fmtTime(w.time):''}</small>`:unavail('Weather data unavailable from Open-Meteo right now.')}</div></div></div>
+ <div class="card" style="margin-top:16px"><div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px"><h3>PM2.5 — past 2 days and 3-day forecast</h3><span>${badge('mod')} ${badge('fc')}</span></div><div class="chartbox"><canvas id="chAir"></canvas></div><small class="mut">Solid line: model analysis for past hours. Dashed: forecast. Times in your local time zone.</small></div>
+ <div class="card" style="margin-top:16px"><h3>Measured station data</h3><div id="measured">${!S.keys.openaq&&!S.keys.waqi?unavail('No measured station source configured. Everything above is <b>modelled</b>. Add an OpenAQ key or WAQI token on <a href="#/sources">Data Sources</a> to show nearby station measurements alongside (never instead of) the model.'):'<div class="skeleton" style="height:80px"></div>'}</div></div>`;
+ bindLoc(); animate($('#p-air')); icons();
+ const i0=Math.max(0,rec.nowIdx-48),i1=Math.min(rec.ts.length-1,rec.nowIdx+72),lab=[],pa=[],pf=[];
+ for(let i=i0;i<=i1;i++){ lab.push(new Date(rec.ts[i]*1000).toLocaleString([],{weekday:'short',hour:'2-digit'})); const v=rec.h.pm2_5[i]; pa.push(i<=rec.nowIdx?v:null); pf.push(i>=rec.nowIdx?v:null); }
+ mkChart('chAir',{type:'line',data:{labels:lab,datasets:[{label:'Past (model analysis)',data:pa,borderColor:'#35d4ff',backgroundColor:'rgba(53,212,255,.15)',fill:true,pointRadius:0,tension:.3},{label:'Forecast',data:pf,borderColor:'#ffc247',borderDash:[6,4],pointRadius:0,tension:.3}, {label:'WHO 24-h guideline (15)',data:lab.map(()=>15),borderColor:'rgba(255,255,255,.4)',borderDash:[2,4],pointRadius:0,borderWidth:1}]},options:{interaction:{mode:'index',intersect:false},scales:{y:{title:{display:true,text:'PM2.5 µg/m³'},beginAtZero:true},x:{ticks:{maxTicksLimit:10}}},plugins:{legend:{labels:{boxWidth:10}}}}});
+ if(S.keys.openaq||S.keys.waqi) loadMeasured(c).then(m=>{ if(S.page!=='air'||cur().id!==c.id) return; const box=$('#measured'); if(!box) return; let h='';
+  if(m.waqi) h+=`<div class="pol" style="margin-bottom:8px"><small><span>WAQI station: ${esc(m.waqi.city&&m.waqi.city.name)}</span>${badge('mea')}</small><b>${esc(m.waqi.aqi)}<i>US AQI scale (station-reported)</i></b><small>PM2.5 ${esc(m.waqi.iaqi&&m.waqi.iaqi.pm25?m.waqi.iaqi.pm25.v:'—')} · PM10 ${esc(m.waqi.iaqi&&m.waqi.iaqi.pm10?m.waqi.iaqi.pm10.v:'—')} · ${esc(m.waqi.time&&m.waqi.time.iso||'')}</small></div>`; else if(m.waqiErr) h+=`<div class="unav">WAQI: ${esc(m.waqiErr)}</div>`;
+  if(m.oaq) h+=m.oaq.length?m.oaq.map(l=>`<div class="pol" style="margin-bottom:8px"><small><span>OpenAQ: ${esc(l.name||'station')} (${esc(l.provider||'provider')})</span>${badge('mea')}</small>${l.vals.map(v=>`<span class="pill" style="--c:#4be3a8;margin:3px">${esc(v.p)} ${esc(v.v)} ${esc(v.u)} · ${esc(v.t?new Date(v.t).toLocaleString():'')}</span>`).join('')||'<small>No latest values</small>'}</div>`).join(''):unavail('No OpenAQ stations within 25 km.'); else if(m.oaqErr) h+=`<div class="unav">OpenAQ: ${esc(m.oaqErr)}</div>`;
+  box.innerHTML=h||unavail('No measured data returned.'); });
+}
+function renderSound(){
+ const c=cur(); const R=(l,d)=>`<tr><td>${l}</td><td class="mut">${d}</td><td>—</td></tr>`;
+ $('#p-sound').innerHTML=pageHead('Sound Quality Intelligence',`Environmental noise for ${esc(c.name)}. AQI Monitor only displays official or validated acoustic measurements — it never estimates sound levels.`)+
+ `<div class="card"><h2>${flag(c.cc)} ${esc(c.name)} — ambient noise ${badge('na')}</h2>${unavail('<b>'+NOISE_MSG+'</b><br>No free, global, real-time noise API exists. Verified data comes from national networks and periodic strategic noise maps (e.g. EEA / EU Environmental Noise Directive). Source integration is registered on the Data Sources page.')}
+ <div class="tw" style="margin-top:14px"><table><thead><tr><th>Metric</th><th>Definition</th><th>Value</th></tr></thead><tbody>
+ ${R('Ambient noise LAeq','A-weighted equivalent continuous level, dB(A)')}${R('Daytime average (Lday)','Typically 07:00–19:00')}${R('Night-time average (Lnight)','Typically 23:00–07:00 — WHO/EU indicator')}${R('Lden','Day-evening-night level with 5/10 dB penalties')}${R('Peak (LAmax)','Highest instantaneous level')}${R('Traffic noise','Road / rail')}${R('Industrial noise','')}${R('Construction noise','')}${R('Airport noise','')}${R('Residential noise','')}</tbody></table></div>
+ <p class="note">Day-versus-night comparison and historical charts appear automatically once a verified source is connected. Until then, no chart is drawn to avoid implying data that does not exist.</p></div>
+ <div class="grid g2" style="margin-top:16px"><div class="card"><h3>Sound quality categories (presentation bands)</h3><div class="tw"><table><tbody>${[['Quiet','< 40 dB(A)',PAL[0]],['Comfortable','40–55 dB(A)',PAL[1]],['Moderate','55–65 dB(A)',PAL[2]],['Noisy','65–75 dB(A)',PAL[3]],['Highly Noisy','> 75 dB(A)',PAL[4]]].map(r=>`<tr><td><span class="pill" style="--c:${r[2]}">${r[0]}</span></td><td>${r[1]}</td></tr>`).join('')}</tbody></table></div><p class="note">AQI Monitor presentation bands for readability — not regulatory thresholds.</p></div>
+ <div class="card"><h3>WHO Environmental Noise Guidelines (2018)</h3><div class="tw"><table><thead><tr><th>Source</th><th>Lden</th><th>Lnight</th></tr></thead><tbody><tr><td>Road traffic</td><td>53 dB</td><td>45 dB</td></tr><tr><td>Railway</td><td>54 dB</td><td>44 dB</td></tr><tr><td>Aircraft</td><td>45 dB</td><td>40 dB</td></tr><tr><td>Wind turbines</td><td>45 dB</td><td>—</td></tr><tr><td>Leisure noise (LAeq,24h)</td><td colspan="2">70 dB</td></tr></tbody></table></div><p class="note">WHO values are health-based recommendations (guideline ≠ legal limit). <a href="https://www.who.int/europe/publications/i/item/9789289053563" target="_blank" rel="noopener">WHO publication</a></p></div></div>
+ <div class="card" style="margin-top:16px"><h3>Examples of national / regional standards</h3><div class="tw"><table><thead><tr><th>Jurisdiction</th><th>Standard</th><th>Values</th></tr></thead><tbody>
+ <tr><td>India</td><td>Noise Pollution (Regulation &amp; Control) Rules, 2000 — ambient limits LAeq day / night</td><td>Industrial 75/70 · Commercial 65/55 · Residential 55/45 · Silence zone 50/40 dB(A)</td></tr>
+ <tr><td>European Union</td><td>Environmental Noise Directive 2002/49/EC — strategic mapping thresholds</td><td>Lden ≥ 55 dB and Lnight ≥ 50 dB reported</td></tr>
+ <tr><td>United States</td><td>EPA “Levels Document” (1974) — advisory levels</td><td>Ldn 55 dB outdoor activity interference · Leq(24) 70 dB hearing protection</td></tr></tbody></table></div><p class="note">Metrics are kept distinct: LAeq (average), Lden / Lnight (annualised, penalised) and peak (LAmax) are never interchanged. Consult each regulator for current rules.</p></div>`;
+ bindLoc(); icons();
+}
+async function renderAnalysis(){
+ const c=cur(); const head=pageHead('Pollution Cause Analysis',`AI-assisted interpretation of why air quality looks the way it does at ${esc(c.name)} — with evidence and confidence for every possible cause.`);
+ if(!S.data[c.id]){ $('#p-analysis').innerHTML=head+skel(3); return bindLoc(); }
+ ensureDetail(c).then(()=>{ if(S.page==='analysis'&&cur().id===c.id&&!S._an) {S._an=1; renderAnalysis().finally(()=>S._an=0);} });
+ if(S.keys.firms&&!S.fires[c.id]) loadFires(c).then(()=>{ if(S.page==='analysis'&&cur().id===c.id&&!S._an){S._an=1;renderAnalysis().finally(()=>S._an=0)} });
+ const I=gatherInput(S.aScope); if(!I){ $('#p-analysis').innerHTML=head+unavail('No data for this scope.'); return bindLoc(); }
+ const list=analyse(I), sup=list.filter(x=>x.status==='possible'), oth=list.filter(x=>x.status!=='possible');
+ const top=POL.map(p=>{const k={pm2_5:'pm25',pm10:'pm10',nitrogen_dioxide:'no2',sulphur_dioxide:'so2',carbon_monoxide:'co',ozone:'o3'}[p.k];const v=I.p[k];return {p,r:v==null?0:v/p.who,v}}).sort((a,b)=>b.r-a.r)[0];
+ const confCol={Medium:PAL[2],Low:PAL[1],None:'#7c8aa0','—':'#7c8aa0'};
+ const card=x=>`<div class="card cause" style="--c:${confCol[x.conf]};margin-top:12px"><div style="display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap"><h3>${esc(x.name)}</h3><span>${x.kind==='Contextual hypothesis'?badge('ctx'):x.kind==='Not assessed'?badge('na'):badge('mod')} <span class="badge b-na">Confidence: ${esc(x.conf)}</span></span></div><p>${esc(x.why)}</p><b style="font-size:.8rem">Supporting evidence</b><ul>${x.ev.map(e=>`<li>${esc(e)}</li>`).join('')}</ul><small class="mut"><b>Nature:</b> ${esc(x.nature)} · <b>Weather:</b> ${esc(x.weather)} · <b>Evidence type:</b> ${esc(x.kind)}</small></div>`;
+ $('#p-analysis').innerHTML=head+`<div class="card"><div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px"><h2>Overall interpretation</h2><div class="seg" role="group" aria-label="Analysis scope">${['city','region','country'].map(s=>`<button data-scope="${s}" aria-pressed="${S.aScope===s}">${s[0].toUpperCase()+s.slice(1)}</button>`).join('')}</div></div>
+ <p>${S.aScope==='city'?esc(c.name):S.aScope==='region'?esc(c.state)+' ('+I.list.length+' monitored cities)':esc(c.country)+' ('+I.list.length+' monitored cities, averaged)'}: the pollutant furthest above its WHO guideline is <b>${top.p.label}</b> at ${fmt(top.v*top.p.conv,top.p.d)} ${top.p.unit} (${top.r.toFixed(1)}× guideline). ${sup.length?`${sup.length} possible contributing factor${sup.length>1?'s are':' is'} supported by indicators in the data.`:'No source or meteorological factor is strongly supported by the available indicators.'}</p>
+ <div class="note warn"><b>How to read this.</b> This is an AI-assisted, rule-based interpretation that runs in your browser on modelled data. It identifies <i>indicators consistent with</i> sources — it does not confirm that any source caused the pollution. “Contextual” items are general seasonal knowledge and are not verified for today. Confirmation needs emission inventories, source apportionment studies or official investigations.</div></div>
+ <h2 style="margin:20px 0 4px">Factors supported by data</h2>${sup.length?sup.map(card).join(''):unavail('None of the checked factors is supported by indicators in the current data.')}
+ <details style="margin-top:18px"><summary>Other factors checked — no supporting evidence or not assessed (${oth.length})</summary>${oth.map(card).join('')}</details>`;
+ bindLoc(); icons();
+}
+function renderTravel(){
+ const c=cur(),rec=S.data[c.id],head=pageHead('Global Travel Intelligence',`Government advisories and an environmental assessment for ${esc(c.name)}, ${esc(c.country)} — kept strictly separate.`);
+ if(!rec){ $('#p-travel').innerHTML=head+skel(3); return bindLoc(); }
+ loadAdvisories().then(()=>{ if(S.page==='travel'&&!S._tv){S._tv=1;renderTravel();setTimeout(()=>S._tv=0,50)} });
+ ensureDetail(c).then(()=>{ if(S.page==='travel'&&cur().id===c.id&&!S._tv2){S._tv2=1;renderTravel();setTimeout(()=>S._tv2=0,50)} });
+ const ea=envAdvisory(c),bw=bestWindows(c),a=advOf(c.cc),col=PAL[Math.min(ea.level,5)];
+ const L=ea.level, rec2=[];
+ rec2.push(L<=1?'Conditions are generally suitable for normal outdoor sightseeing.':L===2?'Sensitive travellers (children, older adults, heart/lung conditions, pregnancy) should limit prolonged outdoor exertion.':L===3?'Reduce strenuous outdoor activity; favour shorter outdoor segments with breaks indoors.':'Avoid prolonged outdoor activity; plan mainly indoor activities and consider a well-fitted respirator (N95/FFP2) if you must be outside.');
+ if(ea.aqL>=2) rec2.push('Air pollution precautions: keep windows closed in polluted hours, use filtered indoor air, and carry any prescribed inhalers.');
+ if(ea.hL>=2) rec2.push(`Heat: apparent temperature may reach ${fmt(ea.maxApp)} °C in the next 24 h — hydrate, rest in shade, schedule activity early or late.`);
+ const indoor=L>=2?'Indoor alternatives to consider: museums, galleries, covered markets, transit-connected malls, aquariums, cultural performances.':null;
+ const off=[['US Department of State — Travel Advisories','https://travel.state.gov/content/travel/en/traveladvisories/traveladvisories.html'],['UK FCDO — Foreign travel advice','https://www.gov.uk/foreign-travel-advice'],['Australia — Smartraveller','https://www.smartraveller.gov.au/destinations'],['Canada — Travel Advice & Advisories','https://travel.gc.ca/travelling/advisories'],['India — Ministry of External Affairs','https://www.mea.gov.in/']];
+ $('#p-travel').innerHTML=head+`<div class="grid g2"><div class="card" style="--c:${col}"><h2>Environmental Travel Advisory ${badge('mod')} ${badge('fc')}</h2>
+ <div style="margin:10px 0"><span class="pill" style="--c:${col};font-size:1rem">Level ${L} — ${esc(ea.label)}</span></div>
+ <div class="grid g3" style="grid-template-columns:repeat(3,1fr)"><div class="pol"><small>US AQI now</small><b>${fmt(ea.nowAq)}</b></div><div class="pol"><small>Max AQI 24 h</small><b>${fmt(ea.maxAq)}</b></div><div class="pol"><small>Max feels-like</small><b>${fmt(ea.maxApp)}<i>°C</i></b></div></div>
+ <ul style="margin:12px 0 0 18px;padding:0">${rec2.map(r=>`<li>${esc(r)}</li>`).join('')}</ul>
+ <h3 style="margin-top:14px">Suitable hours for sightseeing</h3>${bw?`<p>Best 3-hour daylight window in the next 24 h: <b>${esc(bw.text)}</b> (≈ US AQI ${bw.aq}, feels like ≈ ${bw.app} °C).</p>`:'<p class="mut">Calculating hourly windows from forecast data… (needs the hourly forecast and daylight hours 07:00–19:00 local).</p>'}
+ ${indoor?`<p>${esc(indoor)}</p>`:''}<h3 style="margin-top:14px">Noise-sensitive travel</h3><p class="mut">${NOISE_MSG} If you are noise-sensitive, request accommodation away from major roads, rail lines and airport flight paths and ask the host about night-time noise.</p>
+ <p class="note">Environmental level = the worse of the AQI category (forecast max, US EPA scale) and heat-stress level (NWS-style apparent-temperature bands). It is an AQI Monitor assessment based on modelled data, <b>not</b> an official advisory and unrelated to security risk.</p></div>
+ <div class="card"><h2>Government advisories</h2>${a?`<p><span class="pill" style="--c:${colorOf(scaleFor('adv'),+a.score)}">Composite risk ${(+a.score).toFixed(1)} / 5</span></p><p>${esc(a.message||'')}</p><small class="mut">Sources aggregated: ${esc(a.sources_active||'n/a')} · updated ${esc(a.updated||'n/a')} · via travel-advisory.info (an aggregator of government advisories, not an official source)</small>`:unavail(S.advTried&&!S.adv?'The advisory aggregator is unreachable right now. Please use the official sources below.':'Loading advisory data…')}
+ <p class="note">Security warnings, health advisories, natural-disaster alerts and regional restrictions are authored by governments and change quickly — always read the official page for the destination.</p>
+ <h3>Official sources</h3><div class="chips" style="flex-direction:column;align-items:flex-start">${off.map(o=>`<a class="btn sm" href="${o[1]}" target="_blank" rel="noopener">${esc(o[0])} ↗</a>`).join('')}</div>
+ <h3 style="margin-top:14px">Health, hazards &amp; tourism</h3><div class="chips"><a class="btn sm" href="https://wwwnc.cdc.gov/travel/destinations/list" target="_blank" rel="noopener">CDC Travelers' Health ↗</a><a class="btn sm" href="https://www.who.int/travel-advice" target="_blank" rel="noopener">WHO travel advice ↗</a><a class="btn sm" href="https://www.gdacs.org/" target="_blank" rel="noopener">GDACS disaster alerts ↗</a><a class="btn sm" href="https://www.google.com/search?q=${encodeURIComponent('official tourism board '+c.country)}" target="_blank" rel="noopener">Find official tourism board ↗</a></div>
+ <h3 style="margin-top:14px">Emergency numbers</h3><p>${flag(c.cc)} ${esc(EMERG[c.cc]||'Not in AQI Monitor list — 112 works in many countries; verify locally.')}</p></div></div>`;
+ bindLoc(); icons();
+ if(a){ const ls=store.get('ep_adv',{}); const prev=ls[c.cc]; if(prev!=null&&prev!==+a.score&&S.watch.includes(c.id)&&S.alertCfg.advisory){ toast(`Travel advisory score for ${c.country} changed: ${prev} → ${a.score}`,'warn'); sfx('advisory'); } ls[c.cc]=+a.score; store.set('ep_adv',ls); }
+}
+async function renderTrends(){
+ const c=cur(),T=S.trend; const vars=[['pm2_5','PM2.5 (µg/m³)'],['pm10','PM10 (µg/m³)'],['nitrogen_dioxide','NO₂ (µg/m³)'],['sulphur_dioxide','SO₂ (µg/m³)'],['ozone','O₃ (µg/m³)'],['us_aqi','US AQI']];
+ $('#p-trends').innerHTML=pageHead('Historical Environmental Trends',`Past pollution for ${esc(c.name)}: daily averages, peaks and change versus the previous period. Historical values are CAMS model analysis (global coverage from ${CFG.AQ_START}), not station records.`)+
+ `<div class="card" style="margin-bottom:16px;display:flex;gap:12px;flex-wrap:wrap;align-items:center"><div class="seg" role="group" aria-label="Range">${Object.keys(HR).map(r=>`<button data-range="${r}" aria-pressed="${T.range===r}">${({'24h':'24 hours','7d':'7 days','30d':'30 days','6m':'6 months','1y':'1 year'})[r]}</button>`).join('')}</div><select id="trVar" aria-label="Pollutant">${vars.map(v=>`<option value="${v[0]}" ${T.v===v[0]?'selected':''}>${v[1]}</option>`).join('')}</select><span>${badge('mod')}</span></div><div id="trBody"><div class="skeleton" style="height:340px"></div></div>`;
+ bindLoc();
+ $$('#p-trends [data-range]').forEach(b=>b.onclick=()=>{S.trend.range=b.dataset.range;renderTrends()}); $('#trVar').onchange=e=>{S.trend.v=e.target.value;renderTrends()};
+ let H; try{ H=await loadHistory(c,T.range,T.v); }catch(e){ if(S.page==='trends') $('#trBody').innerHTML=unavail('Historical data could not be retrieved ('+esc(e.message)+'). Open-Meteo may be rate-limiting — try again shortly.'); sfx('error'); return; }
+ if(S.page!=='trends'||cur().id!==c.id) return;
+ if(!H.cur.length){ $('#trBody').innerHTML=unavail('No historical observations exist for this range and location.'); return; }
+ const hourly=H.agg==='h', unit=T.v==='us_aqi'?'AQI':'µg/m³';
+ const pts=hourly?H.cur.map(([t,v])=>({t,mean:v,max:v})):aggDaily(H.cur), prevP=hourly?H.prev.map(([t,v])=>({mean:v})):aggDaily(H.prev);
+ const m=pts.map(p=>p.mean), avg=m.reduce((a,b)=>a+b,0)/m.length, pk=pts.reduce((a,b)=>b.max>a.max?b:a), mn=pts.reduce((a,b)=>b.mean<a.mean?b:a);
+ const pa=prevP.length>=pts.length*.5?prevP.map(p=>p.mean).reduce((a,b)=>a+b,0)/prevP.length:null, chg=pa?((avg-pa)/pa*100):null;
+ const WHO={pm2_5:15,pm10:45,nitrogen_dioxide:25,sulphur_dioxide:40,ozone:100}[T.v], over=!hourly&&WHO?pts.filter(p=>p.mean>WHO).length:null;
+ const lab=pts.map(p=>hourly?new Date(p.t*1000).toLocaleString([],{weekday:'short',hour:'2-digit'}):fmtDay(p.t));
+ $('#trBody').innerHTML=`<div class="grid g4" style="margin-bottom:16px"><div class="card kpi"><b>${avg.toFixed(1)}</b><span>${hourly?'Average':'Mean of daily averages'} (${unit})</span></div><div class="card kpi"><b>${pk.max.toFixed(0)}</b><span>Peak ${hourly?fmtTime(pk.t):fmtDay(pk.t)}</span></div><div class="card kpi"><b>${mn.mean.toFixed(1)}</b><span>Lowest ${hourly?'hour':'day'}</span></div><div class="card kpi"><b>${chg==null?'n/a':(chg>0?'+':'')+chg.toFixed(0)+'%'}</b><span>${chg==null?'Previous period not available':'vs previous equal period'}</span></div></div>
+ <div class="card"><h3>${esc(vars.find(v=>v[0]===T.v)[1])} — ${hourly?'hourly':'daily mean and daily peak'}</h3><div class="chartbox"><canvas id="chTr"></canvas></div><small class="mut">${hourly?'':'Daily values aggregated by UTC date. '}All values are model analysis for past times; no forecast is included. ${over!=null?`${over} of ${pts.length} days exceeded the WHO 24-h guideline (${WHO} µg/m³).`:''}</small></div>
+ ${!hourly&&pts.length>40?'<div class="card" style="margin-top:16px"><h3>Monthly averages</h3><div class="chartbox sm"><canvas id="chMo"></canvas></div></div>':''}`;
+ const ds=[{label:'Mean',data:m,borderColor:'#35d4ff',backgroundColor:'rgba(53,212,255,.15)',fill:true,pointRadius:0,tension:.25,borderWidth:2}]; if(!hourly) ds.push({label:'Daily peak',data:pts.map(p=>p.max),borderColor:'#ff7a45',borderDash:[4,3],pointRadius:0,tension:.25,borderWidth:1.3});
+ if(WHO) ds.push({label:'WHO 24-h guideline',data:m.map(()=>WHO),borderColor:'rgba(255,255,255,.45)',borderDash:[2,4],pointRadius:0,borderWidth:1});
+ mkChart('chTr',{type:'line',data:{labels:lab,datasets:ds},options:{interaction:{mode:'index',intersect:false},scales:{y:{beginAtZero:true,title:{display:true,text:unit}},x:{ticks:{maxTicksLimit:10}}}}});
+ if(!hourly&&pts.length>40){ const mo=new Map(); pts.forEach(p=>{const k=new Date(p.t*1000).toISOString().slice(0,7); const o=mo.get(k)||{s:0,n:0}; o.s+=p.mean;o.n++;mo.set(k,o)}); const ks=[...mo.keys()]; mkChart('chMo',{type:'bar',data:{labels:ks,datasets:[{label:'Monthly mean '+unit,data:ks.map(k=>mo.get(k).s/mo.get(k).n),backgroundColor:'rgba(45,226,192,.55)',borderRadius:6}]},options:{plugins:{legend:{display:false}}}}); }
+}
+function addCompare(id){ if(S.cmp.includes(id)){toast('Already in comparison.');return} if(S.cmp.length>=4){ S.cmp.shift(); } S.cmp.push(id); toast(`${cityById(id).name} added to comparison.`); sfx('click'); if(S.page==='compare') renderCompare(); }
+function renderCompare(){
+ const ids=S.cmp.filter(id=>cityById(id)); const opts=sel=>S.cities.map(c=>`<option value="${c.id}" ${c.id===sel?'selected':''}>${esc(c.name)}</option>`).join('');
+ const slots=[0,1,2,3].map(i=>`<select class="cmpSel" data-i="${i}" aria-label="City ${i+1}"><option value="">— none —</option>${opts(ids[i])}</select>`).join('');
+ const cs=ids.map(cityById); const loaded=cs.filter(c=>S.data[c.id]);
+ const rowsDef=[['AQI ('+S.std+')',c=>{const v=aqiAt(S.data[c.id],S.std,null),ct=catOf(S.std,v);return `<span class="pill" style="--c:${ct.color}">${fmt(v)} · ${esc(ct.label)}</span>`}],['PM2.5 µg/m³',c=>fmt(S.data[c.id].cur.pm2_5,1)],['PM10 µg/m³',c=>fmt(S.data[c.id].cur.pm10,1)],['NO₂ µg/m³',c=>fmt(S.data[c.id].cur.nitrogen_dioxide,1)],['Temperature °C',c=>fmt(S.data[c.id].wx&&S.data[c.id].wx.temp,1)],['Humidity %',c=>fmt(S.data[c.id].wx&&S.data[c.id].wx.hum)],['Wind km/h',c=>fmt(S.data[c.id].wx&&S.data[c.id].wx.wind)],['Noise',()=>'<span class="mut">Unavailable</span>'],['Environmental advisory',c=>{const e=envAdvisory(c);return `<span class="pill" style="--c:${PAL[e.level]}">L${e.level} ${esc(e.label)}</span>`}],['Gov. advisory (composite)',c=>{const a=advOf(c.cc);return a?`<span class="pill" style="--c:${colorOf(scaleFor('adv'),+a.score)}">${(+a.score).toFixed(1)}/5</span>`:'<span class="mut">n/a</span>'}]];
+ $('#p-compare').innerHTML=pageHead('City Comparison','Compare up to four cities side by side using the same model, time and AQI methodology.',slots)+
+ (loaded.length?`<div class="card"><div class="tw"><table><thead><tr><th>Metric</th>${loaded.map(c=>`<th>${flag(c.cc)} ${esc(c.name)}</th>`).join('')}</tr></thead><tbody>${rowsDef.map(r=>`<tr><td class="mut">${r[0]}</td>${loaded.map(c=>`<td>${r[1](c)}</td>`).join('')}</tr>`).join('')}</tbody></table></div><p class="note">${esc(STD[S.std].name)} · modelled (Open-Meteo/CAMS) · ${loaded.map(c=>c.name+' '+new Date(S.data[c.id].fetched).toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})).join(' · ')}</p><div style="margin-top:8px">${stdSeg()}</div></div>
+ <div class="grid g2" style="margin-top:16px"><div class="card"><h3>Current pollutants</h3><div class="chartbox"><canvas id="chCB"></canvas></div></div><div class="card"><h3>PM2.5 trend: past 5 days &amp; 3-day forecast</h3><div class="chartbox"><canvas id="chCL"></canvas></div><small class="mut">Dashed segments are forecast.</small></div></div>`:unavail('Select at least one city with loaded data.'));
+ $$('.cmpSel').forEach(s=>s.onchange=()=>{S.cmp=$$('.cmpSel').map(x=>x.value).filter(Boolean); S.cmp=[...new Set(S.cmp)]; S.cmp.forEach(id=>{ if(!S.data[id]) loadBatch([cityById(id)]).then(()=>renderCompare()); }); sfx('search'); renderCompare();});
+ if(!loaded.length) return;
+ const COL=['#35d4ff','#ffc247','#2de2c0','#ff7a45'];
+ mkChart('chCB',{type:'bar',data:{labels:['PM2.5','PM10','NO₂','SO₂','O₃'],datasets:loaded.map((c,i)=>({label:c.name,backgroundColor:COL[i],borderRadius:5,data:['pm2_5','pm10','nitrogen_dioxide','sulphur_dioxide','ozone'].map(k=>S.data[c.id].cur[k])}))},options:{scales:{y:{title:{display:true,text:'µg/m³'},beginAtZero:true}}}});
+ const ts=S.tlTs; if(ts){ const f=Object.values(S.data)[0].nowIdx; mkChart('chCL',{type:'line',data:{labels:ts.map(t=>new Date(t*1000).toLocaleString([],{weekday:'short',hour:'2-digit'})),datasets:loaded.map((c,i)=>({label:c.name,borderColor:COL[i],backgroundColor:COL[i],pointRadius:0,borderWidth:1.8,tension:.25,data:ts.map(t=>{const r=S.data[c.id],ix=idxFor(r,t);return ix==null?null:r.h.pm2_5[ix]}),segment:{borderDash:cx=>cx.p0DataIndex>=f?[5,4]:undefined}}))},options:{interaction:{mode:'index',intersect:false},scales:{y:{beginAtZero:true,title:{display:true,text:'PM2.5 µg/m³'}},x:{ticks:{maxTicksLimit:8}}}}}); }
+}
+function groupProfile(kind){
+ const c=cur(); let list,title,sel;
+ if(kind==='country'){ if(!S.country) S.country=c.cc; const ccs=[...new Set(S.cities.map(x=>x.cc))].sort((a,b)=>countryName(a).localeCompare(countryName(b))); sel=`<select id="grpSel" aria-label="Country">${ccs.map(cc=>`<option value="${cc}" ${cc===S.country?'selected':''}>${esc(countryName(cc))}</option>`).join('')}</select>`; list=S.cities.filter(x=>x.cc===S.country); title=countryName(S.country); }
+ else{ if(!S.region) S.region={cc:c.cc,state:c.state}; const rs=[...new Map(S.cities.map(x=>[x.cc+'|'+x.state,x])).values()].sort((a,b)=>(a.country+a.state).localeCompare(b.country+b.state)); sel=`<select id="grpSel" aria-label="Region">${rs.map(x=>`<option value="${x.cc}|${esc(x.state)}" ${x.cc===S.region.cc&&x.state===S.region.state?'selected':''}>${esc(x.state)}, ${esc(x.country)}</option>`).join('')}</select>`; list=S.cities.filter(x=>x.cc===S.region.cc&&x.state===S.region.state); title=`${S.region.state}, ${countryName(S.region.cc)}`; }
+ const cc=kind==='country'?S.country:S.region.cc, L=list.filter(x=>S.data[x.id]), avgAq=L.length?L.reduce((s,x)=>s+(aqiAt(S.data[x.id],S.std,null)||0),0)/L.length:null, avgPm=L.length?L.reduce((s,x)=>s+(S.data[x.id].cur.pm2_5||0),0)/L.length:null, a=advOf(cc);
+ const srcs=REG.filter(r=>r.cc==='ALL'||r.cc===cc||(r.cc==='EU'&&EU_CC.has(cc)));
+ const stat=r=>{ if(!r.live) return '<span class="badge b-na">Not integrated</span>'; if(r.key&&!S.keys[r.key]) return '<span class="badge b-fc">Key not set</span>'; const s=Reg.status[r.id]; return s?(s.ok?'<span class="badge b-mea">Operational</span>':'<span class="badge b-na" style="color:var(--bad)">Unreachable</span>'):'<span class="badge b-na">Idle</span>'; };
+ $('#p-'+kind).innerHTML=pageHead((kind==='country'?'Country':'State & Regional')+' Environmental Profile',`${esc(title)} — aggregated from the ${list.length} monitored ${list.length===1?'city':'cities'} in this app's registry. Averages are unweighted and not a national statistic.`,sel)+
+ `<div class="grid g4"><div class="card kpi"><b>${L.length}</b><span>Cities with data</span></div><div class="card kpi"><b>${avgAq==null?'—':Math.round(avgAq)}</b><span>Mean ${S.std} AQI (monitored cities)</span></div><div class="card kpi"><b>${avgPm==null?'—':avgPm.toFixed(0)}</b><span>Mean PM2.5 µg/m³</span></div><div class="card kpi"><b>${a?(+a.score).toFixed(1):'—'}</b><span>Gov. advisory composite /5</span></div></div>
+ <div class="main2" style="margin-top:16px"><div class="card"><h3>Monitored cities</h3>${list.length?`<div class="tw"><table><thead><tr><th>City</th><th>${S.std} AQI</th><th>PM2.5</th><th>PM10</th><th>NO₂</th></tr></thead><tbody>${list.map(x=>{const r=S.data[x.id],v=r?aqiAt(r,S.std,null):null,ct=catOf(S.std,v);return `<tr><td><button class="btn sm" data-city="${x.id}" data-sfx="none">${esc(x.name)}</button></td><td><span class="pill" style="--c:${ct.color}">${fmt(v)}</span></td><td>${fmt(r&&r.cur.pm2_5,1)}</td><td>${fmt(r&&r.cur.pm10,1)}</td><td>${fmt(r&&r.cur.nitrogen_dioxide,1)}</td></tr>`}).join('')}</tbody></table></div>`:unavail('No monitored cities. Search for a city to add it.')}<p class="note">Noise: ${NOISE_MSG}</p><div style="margin-top:8px">${stdSeg()}</div></div>
+ <div class="card"><h3>Emergency &amp; advisory</h3><p>${flag(cc)} ${esc(EMERG[cc]||'Dial 112 where supported; verify locally.')}</p>${a?`<p>Advisory composite <b>${(+a.score).toFixed(1)}/5</b> · ${esc(a.message||'')}</p>`:'<p class="mut">Advisory feed unavailable.</p>'}<a class="btn sm" href="#/travel">Travel intelligence</a></div></div>
+ <div class="card" style="margin-top:16px"><h3>Data-source registry for ${esc(countryName(cc))}</h3><div class="tw"><table><thead><tr><th>Provider</th><th>Type</th><th>Status</th><th>Auth</th><th>Pollutants</th></tr></thead><tbody>${srcs.map(r=>`<tr><td><a href="${r.docs}" target="_blank" rel="noopener">${esc(r.name)}</a></td><td>${badge(r.type==='mod'?'mod':r.type==='mea'?'mea':'')||'<span class="badge b-na">Reference</span>'}</td><td>${stat(r)}</td><td>${esc(r.auth)}</td><td>${esc(r.pollutants)}</td></tr>`).join('')}</tbody></table></div><p class="note">Source priority: (1) official national agency, (2) government open-data portal, (3) international organisations, (4) open-data networks, (5) modelled data as a labelled fallback. National official feeds without a public browser-accessible API are listed but not integrated; modelled data is never silently substituted for measurements.</p></div>`;
+ $('#grpSel').onchange=e=>{ if(kind==='country') S.country=e.target.value; else {const [a2,...b]=e.target.value.split('|'); S.region={cc:a2,state:b.join('|')};} sfx('search'); renderPage(); };
+ $$('#p-'+kind+' [data-city]').forEach(b=>b.onclick=()=>{selectCity(b.dataset.city,{fly:true,open:true,sfx:'marker'}); location.hash='#/air';});
+ icons();
+}
+function renderSources(){
+ const stat=r=>{ if(!r.live) return '<span class="badge b-na">Not integrated</span>'; if(r.key&&!S.keys[r.key]) return '<span class="badge b-fc">Key not set</span>'; const s=Reg.status[r.id]; return s?(s.ok?`<span class="badge b-mea">Operational</span><br><small class="mut">synced ${new Date(s.t).toLocaleTimeString()}</small>`:`<span class="badge b-na" style="color:var(--bad)">Failing</span><br><small class="mut">${esc(s.err)}</small>`):'<span class="badge b-na">Not yet used</span>'; };
+ $('#p-sources').innerHTML=pageHead('Data Sources','Every value in AQI Monitor comes from a source listed here. Official measured data is preferred; modelled data is always labelled and never silently substitutes for measurements.','')+
+ `<div class="card"><h2>Source registry</h2><div class="tw"><table><thead><tr><th>Provider / API</th><th>Scope</th><th>Licence</th><th>Auth</th><th>Parameters</th><th>Update / history</th><th>Status</th></tr></thead><tbody>${REG.map(r=>`<tr><td><b>${esc(r.name)}</b><br><small class="mut">${esc(r.provider)}</small><br><a href="${r.docs}" target="_blank" rel="noopener">docs ↗</a> · <small class="mut" style="word-break:break-all">${esc(r.endpoint)}</small></td><td>${r.cc==='ALL'?'Global':r.cc==='EU'?'EU/EEA':esc(countryName(r.cc))}</td><td>${esc(r.licence)}</td><td>${esc(r.auth)}</td><td>${esc(r.pollutants)}</td><td>${esc(r.freq)}<br><small class="mut">${esc(r.hist)}</small></td><td>${stat(r)}</td></tr>`).join('')}</tbody></table></div></div>
+ <div class="card" style="margin-top:16px"><h2>Optional API keys</h2><p class="mut">Keys unlock measured station data (OpenAQ, WAQI) and fire detections (NASA FIRMS). They are stored <b>only in this browser's localStorage</b> and sent only to the provider. A key in browser code is visible to anyone using this browser — for a public deployment, route these calls through a server-side proxy and keep secrets there. Until configured, those features show an honest “unavailable” state.</p>
+ <div class="grid g3"><div><label class="f" for="kOaq">OpenAQ API key (<a href="https://docs.openaq.org/" target="_blank" rel="noopener">get one</a>)</label><input class="t" id="kOaq" type="password" autocomplete="off" value="${esc(S.keys.openaq)}"></div><div><label class="f" for="kWaqi">WAQI token (<a href="https://aqicn.org/data-platform/token/" target="_blank" rel="noopener">get one</a>)</label><input class="t" id="kWaqi" type="password" autocomplete="off" value="${esc(S.keys.waqi)}"></div><div><label class="f" for="kFirms">NASA FIRMS MAP_KEY (<a href="https://firms.modaps.eosdis.nasa.gov/api/map_key/" target="_blank" rel="noopener">get one</a>)</label><input class="t" id="kFirms" type="password" autocomplete="off" value="${esc(S.keys.firms)}"></div></div>
+ <div class="chips" style="margin-top:12px"><button class="btn pri" id="saveKeys">Save keys</button><button class="btn" id="clearKeys">Clear keys</button></div></div>
+ <div class="card" style="margin-top:16px"><h2>Attribution</h2><p>Air-quality and weather data: <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo.com</a> (CC BY 4.0), containing modified Copernicus Atmosphere Monitoring Service information. Basemap © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap contributors</a>, © <a href="https://carto.com/attributions" target="_blank" rel="noopener">CARTO</a>. Boundaries: Natural Earth. Icons: Lucide. Charts: Chart.js. Map: MapLibre GL JS.</p></div>`;
+ $('#saveKeys').onclick=()=>{ S.keys={openaq:$('#kOaq').value.trim(),waqi:$('#kWaqi').value.trim(),firms:$('#kFirms').value.trim()}; store.set('ep_keys',S.keys); S.measured={};S.fires={}; toast('Keys saved in this browser.'); sfx('refresh'); renderSources(); };
+ $('#clearKeys').onclick=()=>{ S.keys={openaq:'',waqi:'',firms:''}; store.set('ep_keys',S.keys); toast('Keys cleared.'); renderSources(); };
+ icons();
+}
+function renderMethod(){
+ $('#p-method').innerHTML=pageHead('Methodology & Standards','How AQI Monitor calculates, labels and separates environmental information.','')+
+ `<div class="grid g2"><div class="card"><h2>Measured, modelled, forecast</h2><p>Data type is shown on every value. <b>Measured</b> = reported by a monitoring station (only when you configure OpenAQ/WAQI). <b>Modelled</b> = computed by an atmospheric model (Copernicus CAMS via Open-Meteo): it is a gridded estimate and can differ substantially from a street-level sensor. <b>Forecast</b> = model output for future hours. The “past” part of model series is model analysis, not an observation, and is labelled that way.</p><p>Measured values are shown alongside modelled values and never replace them silently.</p></div>
+ <div class="card"><h2>Five distinct concepts</h2><ul><li><b>Concentration</b> — physical amount of a pollutant (µg/m³).</li><li><b>AQI</b> — a standard-specific index derived from concentrations.</li><li><b>Guideline</b> — health-based reference (WHO), not law.</li><li><b>Legal limit</b> — enforceable national/regional standard.</li><li><b>Health advisory</b> — advice for people at a given level.</li></ul></div></div>
+ <div class="card" style="margin-top:16px"><h2>AQI methodologies</h2><div class="tw"><table><thead><tr><th>Standard</th><th>How computed here</th><th>Categories</th></tr></thead><tbody>
+ <tr><td>US EPA AQI</td><td>Open-Meteo calculates from CAMS concentrations (PM2.5/PM10 24-h running, gases 1/8-h).</td><td>0–50 Good · 51–100 Moderate · 101–150 USG · 151–200 Unhealthy · 201–300 Very Unhealthy · 301+ Hazardous</td></tr>
+ <tr><td>European AQI (EEA)</td><td>Open-Meteo calculates from CAMS concentrations.</td><td>0–20 Good · 20–40 Fair · 40–60 Moderate · 60–80 Poor · 80–100 Very Poor · &gt;100 Extremely Poor</td></tr>
+ <tr><td>India National AQI (CPCB)</td><td>Computed in this app: linear sub-indices on CPCB breakpoints; PM2.5, PM10, NO₂, SO₂ use 24-h means (≥ 16 valid hours), CO and O₃ use 8-h means; AQI = highest sub-index; requires ≥ 3 pollutants incl. a PM. NH₃/Pb unavailable.</td><td>0–50 Good · 51–100 Satisfactory · 101–200 Moderate · 201–300 Poor · 301–400 Very Poor · 401–500 Severe</td></tr></tbody></table></div><p class="note">A value from one scale is never relabelled with another scale's categories.</p></div>
+ <div class="card" style="margin-top:16px"><h2>WHO Global Air Quality Guidelines (2021)</h2><div class="tw"><table><thead><tr><th>Pollutant</th><th>Annual</th><th>24-hour</th><th>Other</th></tr></thead><tbody><tr><td>PM2.5</td><td>5 µg/m³</td><td>15 µg/m³</td><td></td></tr><tr><td>PM10</td><td>15 µg/m³</td><td>45 µg/m³</td><td></td></tr><tr><td>NO₂</td><td>10 µg/m³</td><td>25 µg/m³</td><td></td></tr><tr><td>SO₂</td><td>—</td><td>40 µg/m³</td><td></td></tr><tr><td>CO</td><td>—</td><td>4 mg/m³</td><td></td></tr><tr><td>O₃</td><td>—</td><td>—</td><td>Peak season 60 µg/m³ · 8-h 100 µg/m³</td></tr></tbody></table></div></div>
+ <div class="grid g2" style="margin-top:16px"><div class="card"><h2>Pollution cause analysis</h2><p>A transparent rule engine compares modelled concentrations and weather with fixed thresholds (stated in each card's evidence) and, where available, NASA FIRMS fire detections. Output is “indicator consistent with”, labelled Medium/Low confidence at most — never “confirmed”. Seasonal items are marked Contextual. No external language model receives your data.</p></div>
+ <div class="card"><h2>Environmental Travel Advisory</h2><p>Level 0–5 = worse of (US AQI category of the 24-h forecast maximum) and (heat-stress band of forecast apparent temperature: ≥27, 33, 39, 45, 51 °C). Best sightseeing window = lowest combined AQI/heat/rain-chance score across 3 consecutive daylight hours (07:00–19:00 local). Government security advisories are separate and come only from official sources/aggregator.</p></div>
+ <div class="card"><h2>Sound</h2><p>No noise values are estimated. LAeq, Lday, Lden, Lnight and LAmax are distinct metrics and will be displayed separately once verified sources (national networks, EEA noise mapping) are connected.</p></div>
+ <div class="card"><h2>Limitations</h2><p>Model resolution is roughly 11–40 km, so hyper-local hotspots are smoothed. The city list is a curated set, not a station network. Rankings compare only cities in this set. This site is informational and is not medical, legal or travel advice.</p></div></div>`;
+}
+function renderPrivacy(){
+ $('#p-privacy').innerHTML=pageHead('Privacy Policy','Plain-language summary of how AQI Monitor handles information.','')+
+ `<div class="card"><p><b>No accounts, no analytics, no advertising.</b> AQI Monitor does not set tracking cookies and does not send your data to any server operated by the AQI Monitor project.</p>
+ <h3>What is stored in your browser</h3><ul><li><b>localStorage:</b> theme, AQI standard, monitored cities, alert thresholds, optional email (never transmitted), optional API keys, last advisory scores.</li><li><b>sessionStorage:</b> audio preferences for the current session.</li></ul>
+ <h3>Third-party requests</h3><p>Your browser contacts third-party services directly to load data and map assets: Open-Meteo (air, weather, geocoding), CARTO / OpenStreetMap (map tiles), jsDelivr (country boundaries), travel-advisory.info, unpkg and Google Fonts (libraries and fonts), and — only if you add keys — OpenAQ, WAQI and NASA FIRMS. These providers receive your IP address, user agent and the coordinates/city you query, under their own privacy policies.</p>
+ <h3>Location</h3><p>The app never reads your device location. Cities are chosen by you.</p>
+ <h3>Notifications</h3><p>Browser notifications are optional, require your permission and are generated locally while this page is open. Email alerts require a server component that this static file does not include, so the email field is stored only for future use and nothing is sent.</p>
+ <h3>Your controls</h3><p>Clear site data in your browser, or use “Clear keys” on the Data Sources page, to remove stored information.</p></div>`;
+}
+function bindLoc(){ $$('.locsel').forEach(s=>s.onchange=e=>{selectCity(e.target.value,{fly:false,open:false,sfx:'search'})}); }
+const RENDER={overview:renderOverview,air:renderAir,sound:renderSound,analysis:renderAnalysis,travel:renderTravel,trends:renderTrends,compare:renderCompare,country:()=>groupProfile('country'),region:()=>groupProfile('region'),sources:renderSources,method:renderMethod,privacy:renderPrivacy,map:()=>{MapMod.update();}};
+function renderPage(){ try{ (RENDER[S.page]||renderOverview)(); }catch(e){ console.error(e); } icons(); }
+function refreshSelects(){ $$('.locsel').forEach(s=>{ s.outerHTML=locSelect(); }); bindLoc(); }
+
+/* =====================================================================
+   11. SELECTION, SEARCH, WATCHLIST, ALERTS
+   ===================================================================== */
+async function selectCity(id,{fly=true,open=true,sfx:snd='marker'}={}){
+ const c=cityById(id); if(!c) return; S.sel=id; if(snd) sfx(snd);
+ if(!S.data[id]){ try{ await loadBatch([c]); }catch(e){ toast('Could not load data for '+c.name+': '+e.message,'err'); sfx('error'); } }
+ if(S.page==='map'){ if(fly) MapMod.fly(c); if(open) renderCityPanel(c); MapMod.update(); } else renderPage();
+ $$('.locsel').forEach(s=>s.value=id);
+ ensureDetail(c).then(()=>{ if(S.page==='map'&&!$('#side').hidden&&S.sel===id&&false) renderCityPanel(c); else if(S.page!=='map'&&S.page!=='overview'&&S.sel===id&&!['sound','privacy','method','sources','compare'].includes(S.page)&&(S.page==='air'||S.page==='trends'||S.page==='travel'||S.page==='analysis')&&!S._busy){ S._busy=1; renderPage(); setTimeout(()=>S._busy=0,100);} });
+}
+function toggleWatch(id){ const i=S.watch.indexOf(id); if(i>=0) S.watch.splice(i,1); else S.watch.push(id); store.set('ep_watch',S.watch); sfx('click'); toast(i>=0?'Stopped monitoring.':'Monitoring '+cityById(id).name+'. Configure alerts with the bell icon.'); const c=cur(); if(S.page==='map'&&!$('#side').hidden&&S.sel===id) renderCityPanel(c); if(S.page==='overview') renderOverview(); $('#btnAlerts .dot').hidden=!S.watch.length; }
+function openAlerts(){
+ const d=$('#alertDlg'), cfg=S.alertCfg, wl=S.watch.map(cityById).filter(Boolean);
+ d.innerHTML=`<form method="dialog"><div style="display:flex;justify-content:space-between;align-items:center"><h2 id="alertTitle">Alerts &amp; monitored cities</h2><button class="ibtn" value="close" aria-label="Close">✕</button></div>
+ <p class="mut">Alerts are checked in this browser every time data refreshes (every 15 min while the page is open).</p>
+ <h3>Monitored</h3>${wl.length?wl.map(c=>`<div class="row"><span>${flag(c.cc)} ${esc(c.name)}</span><button type="button" class="btn sm" data-unw="${c.id}">Remove</button></div>`).join(''):'<p class="mut">None. Open a city and press Monitor.</p>'}
+ <label class="f" for="aAqi">AQI above (selected standard: ${S.std})</label><input class="t" id="aAqi" type="number" min="0" value="${cfg.aqi}">
+ <label class="f" for="aPm">PM2.5 above (µg/m³)</label><input class="t" id="aPm" type="number" min="0" value="${cfg.pm25}">
+ <div class="row"><label for="aAdv">Alert on government advisory score change</label><input id="aAdv" type="checkbox" ${cfg.advisory?'checked':''}></div>
+ <div class="row"><span class="mut">Noise threshold</span><small class="mut">Unavailable — no verified noise data</small></div>
+ <div class="row"><span class="mut">Nearby wildfire detection</span><small class="mut">${S.keys.firms?'Active with FIRMS key (within ~50 km, 24 h)':'Needs NASA FIRMS key'}</small></div>
+ <label class="f" for="aMail">Email (optional — stored locally; sending requires a server, not included)</label><input class="t" id="aMail" type="email" value="${esc(cfg.email)}" placeholder="you@example.com">
+ <div class="chips" style="margin-top:14px"><button type="button" class="btn" id="aNotif">${'Notification' in window?(Notification.permission==='granted'?'Browser notifications ✓':'Enable browser notifications'):'Notifications unsupported'}</button><button type="button" class="btn" id="aTest">Test alert</button><button class="btn pri" value="save" id="aSave">Save</button></div></form>`;
+ d.showModal(); sfx('panel');
+ $$('[data-unw]',d).forEach(b=>b.onclick=()=>{ toggleWatch(b.dataset.unw); openAlerts(); });
+ $('#aNotif',d).onclick=async()=>{ if(!('Notification' in window)) return; const p=await Notification.requestPermission(); S.alertCfg.notify=p==='granted'; store.set('ep_alertcfg',S.alertCfg); toast(p==='granted'?'Browser notifications enabled.':'Permission not granted.',p==='granted'?'':'warn'); openAlerts(); };
+ $('#aTest',d).onclick=()=>notify('AQI Monitor test alert','This is how alerts will appear.');
+ $('#aSave',d).onclick=()=>{ S.alertCfg.aqi=+$('#aAqi',d).value||0; S.alertCfg.pm25=+$('#aPm',d).value||0; S.alertCfg.advisory=$('#aAdv',d).checked; S.alertCfg.email=$('#aMail',d).value.trim(); store.set('ep_alertcfg',S.alertCfg); toast('Alert preferences saved.'); };
+}
+function notify(title,body){ toast(title+' — '+body,'warn',7000); sfx('alert'); if(S.alertCfg.notify&&'Notification' in window&&Notification.permission==='granted'){ try{ new Notification(title,{body}); }catch{} } }
+function checkAlerts(){
+ S.watch.forEach(id=>{ const c=cityById(id),r=S.data[id]; if(!c||!r) return; const a=aqiAt(r,S.std,null), pm=r.cur.pm2_5;
+  const chk=(key,cond,msg)=>{ if(cond){ if(!S.alerted[id+key]){ S.alerted[id+key]=1; notify(`${c.name} air alert`,msg);} } else delete S.alerted[id+key]; };
+  chk('aqi',a!=null&&S.alertCfg.aqi>0&&a>=S.alertCfg.aqi,`${S.std} AQI ${Math.round(a)} (${catOf(S.std,a).label}) ≥ ${S.alertCfg.aqi} · modelled`);
+  chk('pm',pm!=null&&S.alertCfg.pm25>0&&pm>=S.alertCfg.pm25,`PM2.5 ${pm&&pm.toFixed(0)} µg/m³ ≥ ${S.alertCfg.pm25} · modelled`);
+  if(S.keys.firms) loadFires(c).then(f=>{ if(f&&!f.err){ if(f.n>0&&!S.alerted[id+'fire']){S.alerted[id+'fire']=1; notify(`${c.name} wildfire detection`,`${f.n} VIIRS fire detections within ~50 km in the last 24 h`);} else if(!f.n) delete S.alerted[id+'fire']; } });
+  const adv=advOf(c.cc); if(adv&&S.alertCfg.advisory){ const ls=store.get('ep_adv',{}); if(ls[c.cc]!=null&&ls[c.cc]!==+adv.score){ toast(`Travel advisory for ${c.country} changed: ${ls[c.cc]} → ${adv.score}`,'warn',7000); sfx('advisory'); } ls[c.cc]=+adv.score; store.set('ep_adv',ls); } });
+}
+/* search */
+const Search={items:[],act:-1,
+ async run(q){
+  const ql=q.trim().toLowerCase(); if(ql.length<1){this.close();return}
+  const loc=S.cities.filter(c=>c.name.toLowerCase().includes(ql)||c.country.toLowerCase().includes(ql)).slice(0,6).map(c=>({t:'reg',c}));
+  this.items=loc; this.draw();
+  if(ql.length<2) return;
+  try{ const j=await Net.json(`${CFG.GEO}?name=${encodeURIComponent(q.trim())}&count=8&language=en&format=json`,{ttl:3600000,src:'om-geo'});
+   if($('#q').value.trim().toLowerCase()!==ql) return;
+   const have=new Set(S.cities.map(c=>c.name.toLowerCase()+'|'+c.cc));
+   (j.results||[]).forEach(r=>{ const k=(r.name||'').toLowerCase()+'|'+r.country_code; if(have.has(k)) return; this.items.push({t:'geo',r}); });
+   this.draw(); }catch(e){ if(!loc.length){ this.items=[{t:'err'}]; this.draw(); } }
+ },
+ draw(){ const ul=$('#sugg'); if(!this.items.length){ul.innerHTML='<li aria-disabled="true">No matches yet…</li>';} else ul.innerHTML=this.items.map((it,i)=>it.t==='reg'?`<li role="option" id="sg${i}" data-i="${i}">${flag(it.c.cc)} <b>${esc(it.c.name)}</b><small>${esc(it.c.country)}</small></li>`:it.t==='geo'?`<li role="option" id="sg${i}" data-i="${i}">${flag(it.r.country_code)} <b>${esc(it.r.name)}</b><small>${esc([it.r.admin1,it.r.country].filter(Boolean).join(', '))}</small></li>`:'<li aria-disabled="true">Search service unavailable — pick from the list.</li>').join(''); ul.hidden=false; $('#q').setAttribute('aria-expanded','true'); this.act=-1; },
+ close(){ $('#sugg').hidden=true; $('#q').setAttribute('aria-expanded','false'); },
+ async pick(i){ const it=this.items[i]; if(!it||it.t==='err') return; this.close(); $('#q').value='';
+  if(it.t==='reg'){ afterPick(it.c.id); return; }
+  const r=it.r, id='g'+r.id; if(!cityById(id)) S.cities.push({id,name:r.name,cc:r.country_code||'??',country:r.country||'Unknown',state:r.admin1||'—',lat:+r.latitude.toFixed(3),lon:+r.longitude.toFixed(3),custom:true});
+  refreshSelects(); afterPick(id); }
+};
+function afterPick(id){ sfx('search'); if(S.page==='overview'){ location.hash='#/map'; setTimeout(()=>selectCity(id,{fly:true,open:true,sfx:null}),350); } else selectCity(id,{fly:true,open:true,sfx:null}); }
+
+/* =====================================================================
+   12. REFRESH, ROUTER, EVENTS, BOOT
+   ===================================================================== */
+async function refreshAll(manual){
+ try{ await loadBatch(S.cities); S.loaded=true; S.lastSync=new Date(); $('#netBanner').hidden=true; if(manual) { sfx('refresh'); toast('Data refreshed.'); }
+  initTimeline(); MapMod.update(); renderPage(); checkAlerts(); loadAdvisories().then(()=>{ MapMod.update(); if(['travel','country','region','compare'].includes(S.page)) renderPage(); });
+  const cc=cur(); ensureDetail(cc); }
+ catch(e){ $('#netBanner').hidden=false; $('#netBanner').innerHTML=`⚠ Live air-quality data could not be loaded (${esc(e.message)}). ${S.loaded?'Showing the last data received.':'No data is shown rather than invented — check your connection.'} <button class="btn sm" id="retry">Retry</button>`; $('#retry').onclick=()=>refreshAll(true); sfx('error'); if(!S.loaded) renderPage(); }
+}
+const PAGES=['overview','map','air','sound','analysis','travel','trends','compare','country','region','sources','method','privacy'];
+function go(p){
+ if(!PAGES.includes(p)) p='overview'; const changed=S.page!==p; S.page=p; document.body.dataset.page=p;
+ $$('.page').forEach(x=>x.classList.toggle('active',x.id==='p-'+p));
+ $$('#nav [data-page]').forEach(a=>{ if(a.dataset.page===p) a.setAttribute('aria-current','page'); else a.removeAttribute('aria-current'); });
+ $('#btnMore').setAttribute('aria-current',['country','region','sources','method','privacy'].includes(p)?'page':'false');
+ $('#moreMenu').hidden=true; $('#btnMore').setAttribute('aria-expanded','false');
+ sizeHeader(); if(p==='map'){ MapMod.init(); setTimeout(()=>{ MapMod.map&&MapMod.map.resize(); MapMod.update(); },60); } else window.scrollTo(0,0);
+ if(changed) sfx('panel'); renderPage();
+}
+const route=()=>go((location.hash.replace(/^#\/?/,'')||'overview').split('?')[0]);
+function sizeHeader(){ document.documentElement.style.setProperty('--hh',($('#hdr').offsetHeight+($('#netBanner').hidden?0:$('#netBanner').offsetHeight))+'px'); }
+function applyTheme(){ document.documentElement.dataset.theme=S.theme; store.set('ep_theme',S.theme); MapMod.theme(); }
+function audioUI(){ const s=Snd.st; $('#swMusic').setAttribute('aria-pressed',Snd.music); $('#swSfx').setAttribute('aria-pressed',s.sfx); $('#swMute').setAttribute('aria-pressed',s.muted); $('#vol').value=Math.round(s.vol*100); const off=s.muted||(!Snd.music&&!s.sfx); $('#btnAudio').innerHTML=`<i data-lucide="${s.muted?'volume-x':Snd.music?'volume-2':s.sfx?'volume-1':'volume-x'}"></i>`; $('#btnAudio').title=Snd.music?'Music on':'Music off'; icons(); }
+function main(){
+ // theme & audio
+ applyTheme(); chartTheme();
+ Snd.onChange(audioUI); audioUI();
+ const unlock=()=>{ Snd.unlock(); };
+ addEventListener('pointerdown',unlock,{once:true,passive:true}); addEventListener('keydown',unlock,{once:true});
+ document.addEventListener('click',e=>{ const b=e.target.closest('button,a,[role=tab]'); if(b&&b.dataset.sfx!=='none'&&!b.closest('#sugg')&&!b.classList.contains('mk')&&!b.classList.contains('sw')) sfx('click'); },true);
+ document.addEventListener('visibilitychange',()=>Snd.duck(document.hidden));
+ $('#btnAudio').onclick=()=>{ const p=$('#audPop'); p.hidden=!p.hidden; $('#btnAudio').setAttribute('aria-expanded',!p.hidden); };
+ $('#swMusic').onclick=()=>{ Snd.unlock(); const ok=Snd.setMusic(!Snd.music); if(!ok) toast('Audio is not supported or was blocked by your browser.','warn'); };
+ $('#swSfx').onclick=()=>Snd.setSfx(!Snd.st.sfx); $('#swMute').onclick=()=>Snd.setMute(!Snd.st.muted); $('#vol').oninput=e=>Snd.setVol(e.target.value/100);
+ document.addEventListener('click',e=>{ if(!e.target.closest('#audPop')&&!e.target.closest('#btnAudio')) $('#audPop').hidden=true; if(!e.target.closest('.menuwrap')){$('#moreMenu').hidden=true;} if(!e.target.closest('.search')) Search.close(); });
+ $('#btnMore').onclick=()=>{ const m=$('#moreMenu'); m.hidden=!m.hidden; $('#btnMore').setAttribute('aria-expanded',!m.hidden); };
+ $('#btnTheme').onclick=()=>{ S.theme=S.theme==='dark'?'light':'dark'; applyTheme(); renderPage(); };
+ $('#btnAlerts').onclick=openAlerts; $('#btnAlerts .dot').hidden=!S.watch.length;
+ // global delegated std switch
+ document.addEventListener('click',e=>{ const b=e.target.closest('[data-std]'); if(b){ S.std=b.dataset.std; store.set('ep_std',S.std); sfx('layer'); if(S.page==='map'){ MapMod.update(); if(!$('#side').hidden&&$('#sideBody .heroaq')) renderCityPanel(cur()); } else renderPage(); }
+  const sc=e.target.closest('[data-scope]'); if(sc){ S.aScope=sc.dataset.scope; renderAnalysis(); } });
+ // search
+ const q=$('#q'); const deb=debounce(v=>Search.run(v),280);
+ q.addEventListener('input',()=>deb(q.value)); q.addEventListener('focus',()=>{ if(q.value) Search.run(q.value); });
+ q.addEventListener('keydown',e=>{ const li=$$('#sugg li[role=option]'); if(e.key==='ArrowDown'||e.key==='ArrowUp'){ e.preventDefault(); if(!li.length) return; Search.act=(Search.act+(e.key==='ArrowDown'?1:-1)+li.length)%li.length; li.forEach((l,i)=>l.setAttribute('aria-selected',i===Search.act)); q.setAttribute('aria-activedescendant',li[Search.act].id); } else if(e.key==='Enter'){ e.preventDefault(); Search.pick(Search.act>=0?Search.act:0); } else if(e.key==='Escape') Search.close(); });
+ $('#sugg').addEventListener('click',e=>{ const li=e.target.closest('li[data-i]'); if(li) Search.pick(+li.dataset.i); });
+ // map ui
+ $('#layerChips').innerHTML=LAYERS.map(l=>`<button data-layer="${l.id}" data-sfx="none" aria-pressed="${l.id===S.layer}">${l.name}</button>`).join('');
+ $('#layerChips').onclick=e=>{ const b=e.target.closest('[data-layer]'); if(!b) return; S.layer=b.dataset.layer; $$('#layerChips button').forEach(x=>x.setAttribute('aria-pressed',x===b)); sfx('layer'); if(S.layer==='adv') loadAdvisories().then(()=>MapMod.update()); if(S.layer==='fire'&&!S.keys.firms) toast('Wildfire layer needs a NASA FIRMS key (Data Sources). No fire data is invented.','warn'); if(S.layer==='noise') toast(NOISE_MSG,'warn'); MapMod.update(); };
+ $('#mGlobe').onclick=e=>{ const on=e.currentTarget.getAttribute('aria-pressed')!=='true'; e.currentTarget.setAttribute('aria-pressed',on); try{ MapMod.map.setProjection({type:on?'globe':'mercator'}); sfx('layer'); }catch{ toast('Globe view not supported by this map version.','warn'); } };
+ $('#mReset').onclick=()=>{ MapMod.map&&MapMod.map.flyTo({center:[15,24],zoom:innerWidth<760?.9:1.7,pitch:0,bearing:0}); closeSide(); };
+ $('#mProbe').onclick=e=>{ S.probe=!S.probe; e.currentTarget.setAttribute('aria-pressed',S.probe); if(MapMod.map) MapMod.map.getCanvas().style.cursor=S.probe?'crosshair':''; toast(S.probe?'Probe mode: click anywhere on the map for modelled air quality at that point.':'Probe mode off.'); };
+ $('#mFilter').onchange=e=>{ S.filter=+e.target.value; sfx('layer'); MapMod.update(); };
+ $('#tlRange').oninput=e=>{ tlSet(+e.target.value,true); }; $('#tlPlay').onclick=()=>tlPlay(!S.tl.playing); $('#tlNow').onclick=()=>{ const f=Object.values(S.data)[0]; if(f) tlSet(f.nowIdx); tlPlay(false); };
+ addEventListener('hashchange',route); addEventListener('resize',debounce(()=>{sizeHeader(); MapMod.map&&MapMod.map.resize();},150));
+ sizeHeader(); route(); icons();
+ const boot=()=>$('#boot').classList.add('out');
+ const to=setTimeout(boot,9000);
+ refreshAll().finally(()=>{ clearTimeout(to); boot(); });
+ setInterval(()=>refreshAll(),CFG.REFRESH_MS);
+}
+</script>
+</body>
+</html>
